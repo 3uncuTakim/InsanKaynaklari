@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class AdvancePayment:BaseEntity
+    public class AdvancePayment:BaseEntity
     {
         //Avans
         [Key]
         public int AvansID { get; set; }        
         public int Amount { get; set; }
         public DateTime DateOfIssue { get; set; }
-        public string Explanation { get; set; }
+        public string Description { get; set; }
         public bool Status { get; set; }
 
 
