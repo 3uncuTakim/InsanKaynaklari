@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class ExpenseType
+    public class ExpenseType
+        
     {
         public int ExpenseTypeID { get; set; }
         public string ExpenseTypeName { get; set; } 
