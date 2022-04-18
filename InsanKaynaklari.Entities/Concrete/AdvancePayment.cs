@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class AdvancePayment:BaseEntity
+    public class AdvancePayment:BaseEntity
     {
         //Avans
         [Key]

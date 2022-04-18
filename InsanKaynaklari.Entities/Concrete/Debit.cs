@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class Debit
+    public class Debit
     {
         //Zimmet
         [Key]
