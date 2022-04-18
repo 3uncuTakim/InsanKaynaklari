@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class Expense: BaseEntity
+    public class Expense: BaseEntity
     {
         //Harcamalar
         public int ExpenseID { get; set; }

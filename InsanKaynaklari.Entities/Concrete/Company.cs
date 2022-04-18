@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class Company:BaseEntity
+    public class Company:BaseEntity
     {
         [Key]
         public int CompanyID { get; set; }
