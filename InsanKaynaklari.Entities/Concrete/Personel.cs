@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class Personel
+    public class Personel
     {
     }
 }
