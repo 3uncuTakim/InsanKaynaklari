@@ -10,8 +10,7 @@ namespace InsanKaynaklari.Entities.Concrete
     public class Expense: BaseEntity
     {
         //Harcamalar
-        public int ExpenseID { get; set; }
-        public int ID { get; set; }
+
         public string CheckDocument  { get; set; }
         public int ExpenseTypeID { get; set; }
         public int Amount { get; set; }
