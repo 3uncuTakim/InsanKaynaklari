@@ -20,13 +20,15 @@ namespace InsanKaynaklari.Entities.Concrete
         //one to one with Personel Details
         public virtual PersonelDetail PersonelDetail { get; set; }
         //one to many  (many side)
-        public virtual AdvancePayment AdvancePayment { get; set; }
-        public virtual Leave Leave { get; set; }
-        public virtual Debit Debit { get; set; }
-        public virtual Expense Expense { get; set; }
-        public virtual Overtime Overtime { get; set; }
+        public virtual List<AdvancePayment> AdvancePayments { get; set; }
+        public virtual List<Leave> Leaves { get; set; }
+        public virtual List<Debit> Debits { get; set; }
+        public virtual List<Expense> Expenses { get; set; }
+        public virtual List<Overtime> Overtimes { get; set; }
 
         //one to many(one side)
+        public int CompanyID { get; set; }
+        public virtual Company Company { get; set; }
 
 
 
