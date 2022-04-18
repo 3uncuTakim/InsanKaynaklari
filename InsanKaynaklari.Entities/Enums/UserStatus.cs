@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsanKaynaklari.Entities.Concrete
+namespace InsanKaynaklari.Entities.Enums
 {
-    class Overtime
+    public enum UserStatus
     {
-        //Fazla mesai
+        Employee=1,
+        Manager=2
     }
 }
