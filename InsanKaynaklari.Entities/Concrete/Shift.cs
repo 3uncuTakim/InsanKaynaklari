@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    class Shift
+    public class Shift
     {
+
     }
 }

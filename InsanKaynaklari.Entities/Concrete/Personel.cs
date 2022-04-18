@@ -25,6 +25,7 @@ namespace InsanKaynaklari.Entities.Concrete
         public virtual List<Debit> Debits { get; set; }
         public virtual List<Expense> Expenses { get; set; }
         public virtual List<Overtime> Overtimes { get; set; }
+        public virtual List<Shift> Shifts{ get; set; }
 
         //one to many(one side)
         public int CompanyID { get; set; }
