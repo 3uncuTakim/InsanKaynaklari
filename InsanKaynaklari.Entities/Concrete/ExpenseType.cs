@@ -8,5 +8,7 @@ namespace InsanKaynaklari.Entities.Concrete
 {
     class ExpenseType
     {
+        public int ExpenseTypeID { get; set; }
+        public string ExpenseTypeName { get; set; } 
     }
 }
