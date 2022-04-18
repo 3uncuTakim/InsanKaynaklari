@@ -13,8 +13,7 @@ namespace InsanKaynaklari.Entities.Concrete
     {
         //Avans
         [Key]
-        public int AvansID { get; set; }
-        public int PersonelID { get; set; }
+        public int AvansID { get; set; }        
         public int Amount { get; set; }
         public DateTime DateOfIssue { get; set; }
         public string Explanation { get; set; }
