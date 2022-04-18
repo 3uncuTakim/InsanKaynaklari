@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InsanKaynaklari.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    public class Shift
+    public class Shift : BaseEntity
     {
-
+        public DateTime ShiftDay { get; set; }
+        public DateTime StartOfShift { get; set; }
+        public DateTime EndOfShift { get; set; }
+        public string Description { get; set; }
     }
 }
