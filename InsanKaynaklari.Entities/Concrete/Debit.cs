@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InsanKaynaklari.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,14 +8,19 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Concrete
 {
-    public class Debit
-    {
-        //Zimmet
-        [Key]
-        public int DebitID { get; set; }
+    public class Debit : BaseEntity
+    {      
         public string DebitName { get; set; }
+        public string DebitCode { get; set; }
         public DateTime DateOfIssue { get; set; }
         public DateTime DateOfReturn { get; set; }
         public string Description { get; set; }
+
+        //Relational  Properties Begin
+
+        //one to many with Personel
+        public int PersonelID { get; set; }
+        public virtual Personel Personel { get; set; }
+
     }
 }

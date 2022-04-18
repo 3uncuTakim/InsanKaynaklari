@@ -10,10 +10,14 @@ namespace InsanKaynaklari.Entities.Concrete
 {
     public class Company:BaseEntity
     {
-        [Key]
-        public int CompanyID { get; set; }
+        
         public string CompanyName { get; set; }
+        public string Logo { get; set; }
+        public int CountOfPersonel { get; set; }
         public bool Activation { get; set; }
+        //Relational  Properties Begin
+        //one to many with Personel
+        public virtual List<Personel> Personels { get; set; }
 
     }
 }

@@ -11,6 +11,9 @@ namespace InsanKaynaklari.Entities.Concrete
     {
         public string TypeName { get; set; }
 
-        public virtual List<Leave> Leave { get; set; }
+        //Relational  Properties Begin
+        //one to many with LeaveType
+
+        public virtual List<Leave> Leaves { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace InsanKaynaklari.Entities.Concrete
         public string Department { get; set; }
         public string Title { get; set; }
         public decimal Wage { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public string WorkStyle { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

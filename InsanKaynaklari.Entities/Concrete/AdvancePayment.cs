@@ -11,13 +11,15 @@ namespace InsanKaynaklari.Entities.Concrete
 {
     public class AdvancePayment:BaseEntity
     {
-        //Avans
-        [Key]
-        public int AvansID { get; set; }        
-        public int Amount { get; set; }
+             
+        public decimal Amount { get; set; }
         public DateTime DateOfIssue { get; set; }
         public string Description { get; set; }
-        public bool Status { get; set; }
+        public TaskStatus TaskStatus { get; set; }
+        //Relational  Properties Begin
+        //one to many with Personel
+        public int PersonelID { get; set; }
+        public virtual Personel Personel { get; set; }
 
 
 
