@@ -16,7 +16,7 @@ namespace InsanKaynaklari.Entities.Concrete
         public int AvansID { get; set; }        
         public int Amount { get; set; }
         public DateTime DateOfIssue { get; set; }
-        public string Explanation { get; set; }
+        public string Description { get; set; }
         public bool Status { get; set; }
 
 

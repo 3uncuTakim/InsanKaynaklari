@@ -15,6 +15,6 @@ namespace InsanKaynaklari.Entities.Concrete
         public string DebitName { get; set; }
         public DateTime DateOfIssue { get; set; }
         public DateTime DateOfReturn { get; set; }
-        public string Explanation { get; set; }
+        public string Description { get; set; }
     }
 }
