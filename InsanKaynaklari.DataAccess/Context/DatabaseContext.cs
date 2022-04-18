@@ -29,7 +29,9 @@ namespace InsanKaynaklari.DataAccess.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Personel>().HasOne(p => p.PersonelDetail).WithOne(p => p.Personel).HasForeignKey<PersonelDetail>(p => p.ID);
-            //modelBuilder.ApplyConfiguration(new LeaveTypeMAP());
+            modelBuilder.ApplyConfiguration(new LeaveTypeMAP());
+            modelBuilder.ApplyConfiguration(new LeaveMAP());
+            modelBuilder.ApplyConfiguration(new PersonelDetailsMAP());
         }
 
     }

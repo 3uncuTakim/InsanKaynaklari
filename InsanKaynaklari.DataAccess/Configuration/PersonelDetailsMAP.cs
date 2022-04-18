@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InsanKaynaklari.Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.DataAccess.Configuration
 {
-    public class PersonelDetailsMAP
+    public class PersonelDetailsMAP : BaseMap<PersonelDetail>, IEntityTypeConfiguration<PersonelDetail>
     {
-        //Tolunay
+        public void Configure(EntityTypeBuilder<PersonelDetail> builder)
+        {
+            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50); 
+            builder.Property(x => x.LastName).IsRequired().HasMaxLength(50); 
+            builder.Property(x => x.StartDate).IsRequired(); 
+            builder.Property(x => x.EndDate).IsRequired(false);
+            builder.Property(x => x.Wage).IsRequired();
+            builder.Property(x => x.WorkStyle).HasMaxLength(20);
+        }
     }
 }
