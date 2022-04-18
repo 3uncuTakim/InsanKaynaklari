@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsanKaynaklari.Entities.Abstract
+namespace InsanKaynaklari.Entities.Enums
 {
-    public abstract class BaseEntity
+    public enum TaskStatus
     {
-        public int ID { get; set; }
     }
 }
