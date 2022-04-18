@@ -13,5 +13,10 @@ namespace InsanKaynaklari.Entities.Concrete
         public DateTime StartOfShift { get; set; }
         public DateTime EndOfShift { get; set; }
         public string Description { get; set; }
+
+        //Relational  Properties Begin
+        //One to many with personel
+        public int PersonelID { get; set; }
+        public virtual Personel Personel { get; set; }
     }
 }
