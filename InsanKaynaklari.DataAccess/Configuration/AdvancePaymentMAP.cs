@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InsanKaynaklari.Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.DataAccess.Configuration
 {
-    public class AdvancePaymentMAP
+    public class AdvancePaymentMAP : BaseMap<AdvancePayment>, IEntityTypeConfiguration<AdvancePayment>
     {
-        //Azmi
+        public void Configure(EntityTypeBuilder<AdvancePayment> builder)
+        {
+            builder.Property(x => x.Amount).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.DateOfIssue).IsRequired().HasDefaultValueSql("getdate()");
+            builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
+            builder.Property(x => x.TaskStatus).IsRequired();
+            builder.Property(x => x.PersonelID).IsRequired();
+           
+        }
     }
 }
