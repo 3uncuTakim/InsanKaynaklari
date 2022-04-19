@@ -18,6 +18,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(x => x.StartLeaveDate).IsRequired();
             builder.Property(x => x.EndLeaveDate).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(250);
+            builder.Property(x => x.TaskStatus).IsRequired();
         }
     }
 }
