@@ -31,7 +31,12 @@ namespace InsanKaynaklari.DataAccess.Context
             modelBuilder.Entity<Personel>().HasOne(p => p.PersonelDetail).WithOne(p => p.Personel).HasForeignKey<PersonelDetail>(p => p.ID);
             modelBuilder.ApplyConfiguration(new LeaveTypeMAP());
             modelBuilder.ApplyConfiguration(new LeaveMAP());
+            modelBuilder.ApplyConfiguration(new PersonelMAP());
             modelBuilder.ApplyConfiguration(new PersonelDetailsMAP());
+            modelBuilder.ApplyConfiguration(new DebitMAP());
+            modelBuilder.ApplyConfiguration(new ExpenseMAP());
+            modelBuilder.ApplyConfiguration(new ExpenseTypeMAP());
+            modelBuilder.ApplyConfiguration(new ShiftMAP());
         }
 
     }
