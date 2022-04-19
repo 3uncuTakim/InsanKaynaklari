@@ -17,6 +17,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(p => p.Activation).IsRequired();
             builder.Property(p => p.Email).IsRequired().HasMaxLength(50);
             builder.Property(p => p.Password).HasMaxLength(50).IsRequired();
+            builder.Property(p => p.CompanyID).IsRequired();
         }
     }
 }
