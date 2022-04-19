@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InsanKaynaklari.DataAccess.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,8 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Logo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CountOfPersonel = table.Column<int>(type: "int", nullable: false),
                     Activation = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -29,7 +29,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExpenseTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ExpenseTypeName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TypeName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,9 +55,9 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Activation = table.Column<bool>(type: "bit", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false),
                     CompanyID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -79,8 +79,8 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DateOfIssue = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfIssue = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     TaskStatus = table.Column<int>(type: "int", nullable: false),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -101,11 +101,11 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DebitName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DebitCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateOfIssue = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateOfReturn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DebitName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DebitCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    DateOfIssue = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    DateOfReturn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -125,9 +125,9 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CheckDocument = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CheckDocument = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    Explanation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Explanation = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     TaskStatus = table.Column<int>(type: "int", nullable: false),
                     ExpenseTypeID = table.Column<int>(type: "int", nullable: false),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
@@ -155,11 +155,11 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LeaveDocument = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LeaveDocument = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     TotalDaysOff = table.Column<int>(type: "int", nullable: false),
-                    StartLeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndLeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartLeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    EndLeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     TaskStatus = table.Column<int>(type: "int", nullable: false),
                     LeaveTypeID = table.Column<int>(type: "int", nullable: false),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
@@ -186,15 +186,15 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Wage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WorkStyle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    WorkStyle = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {
@@ -213,10 +213,10 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShiftDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StartOfShift = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndOfShift = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShiftDay = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    StartOfShift = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    EndOfShift = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -264,6 +264,12 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 name: "IX_Personels_CompanyID",
                 table: "Personels",
                 column: "CompanyID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Personels_Email",
+                table: "Personels",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shifts_PersonelID",
