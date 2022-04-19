@@ -15,8 +15,8 @@ namespace InsanKaynaklari.DataAccess.Configuration
         {
             builder.Property(x => x.DebitName).IsRequired().HasMaxLength(50);
             builder.Property(x => x.DebitCode).HasMaxLength(50);
-            builder.Property(x => x.DateOfIssue).IsRequired();
-            builder.Property(x => x.DateOfReturn).IsRequired(false);
+            builder.Property(x => x.DateOfIssue).IsRequired().HasDefaultValueSql("getdate()");
+            builder.Property(x => x.DateOfReturn).IsRequired(false).HasDefaultValueSql("getdate()");
             builder.Property(x => x.Description).HasMaxLength(250);
         }
     }
