@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace InsanKaynaklari.DataAccess.Context
 {
     public class DatabaseContext :DbContext
-    {
+    {       
         public DbSet<Company> Companies { get; set; }
         public DbSet<Personel> Personels { get; set; }
         public DbSet<PersonelDetail> PersonelDetails { get; set; }
@@ -37,6 +37,8 @@ namespace InsanKaynaklari.DataAccess.Context
             modelBuilder.ApplyConfiguration(new ExpenseMAP());
             modelBuilder.ApplyConfiguration(new ExpenseTypeMAP());
             modelBuilder.ApplyConfiguration(new ShiftMAP());
+            modelBuilder.ApplyConfiguration(new AdvancePaymentMAP());
+            modelBuilder.ApplyConfiguration(new CompanyMAP());
         }
 
     }
