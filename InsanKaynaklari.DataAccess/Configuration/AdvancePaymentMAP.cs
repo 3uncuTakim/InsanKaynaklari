@@ -13,7 +13,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<AdvancePayment> builder)
         {
-            builder.Property(x => x.Amount).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Amount).IsRequired();
             builder.Property(x => x.DateOfIssue).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
             builder.Property(x => x.TaskStatus).IsRequired();
