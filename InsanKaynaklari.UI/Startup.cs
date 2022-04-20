@@ -1,5 +1,5 @@
-using BlogProject.Utilities.Mailing;
-using BlogProject.Utilities.Mailing.FakeMailSender;
+using InsanKaynaklari.Utilities.Mailing;
+using InsanKaynaklari.Utilities.Mailing.FakeMailSender;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
