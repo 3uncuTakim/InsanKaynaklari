@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InsanKaynaklari.DataAccess.Context;
 using InsanKaynaklari.Business.Mailing;
+using Microsoft.AspNetCore.Http;
 
 namespace InsanKaynaklari.UI.Controllers
 {
@@ -14,9 +15,10 @@ namespace InsanKaynaklari.UI.Controllers
         private readonly DatabaseContext _context;
         private readonly IMailService _mailService;
 
-        public LoginController()
+        public LoginController(DatabaseContext context, IMailService mailService)
         {
-
+            _context = context;
+            _mailService = mailService;
         }
         [HttpGet]
         public IActionResult LogIn(string yonlen)
@@ -27,10 +29,24 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpPost]
         public IActionResult LogIn(LogInViewModel model, string yonlen)
         {
-            /*if (!ModelState.IsValid)*/ return View();
-            
+            if (!ModelState.IsValid) return View();
+            var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));
 
+            if (user is null)
+            {
+                ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı!!");
+                return View();
+            }
 
+            HttpContext.Session.SetString("userId", user.PersonelDetail.ID.ToString());
+            HttpContext.Session.SetString("username", user.PersonelDetail.FirstName);
+
+            if (string.IsNullOrEmpty(yonlen))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return Redirect(yonlen);
         }
     }
 }
