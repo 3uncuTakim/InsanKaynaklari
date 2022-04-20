@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InsanKaynaklari.Utilities.Mailing.FakeMailSender
+namespace InsanKaynaklari.Business.Mailing.FakeMailSender
 {
     public class FakeMailSender : IMailService
     {

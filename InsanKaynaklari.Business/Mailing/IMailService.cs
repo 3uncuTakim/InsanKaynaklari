@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace InsanKaynaklari.Utilities.Mailing
+namespace InsanKaynaklari.Business.Mailing
 {
     public interface IMailService
     {

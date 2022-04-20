@@ -1,5 +1,5 @@
-using InsanKaynaklari.Utilities.Mailing;
-using InsanKaynaklari.Utilities.Mailing.FakeMailSender;
+using InsanKaynaklari.Business.Mailing;
+using InsanKaynaklari.Business.Mailing.FakeMailSender;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +28,7 @@ namespace InsanKaynaklari.UI
             services.AddScoped<IMailService, FakeMailSender>();
             services.AddControllersWithViews();
             services.AddSession();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +45,7 @@ namespace InsanKaynaklari.UI
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
             app.UseSession();
