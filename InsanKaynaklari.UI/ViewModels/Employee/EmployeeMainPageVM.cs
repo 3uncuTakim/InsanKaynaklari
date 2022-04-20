@@ -8,6 +8,7 @@ namespace InsanKaynaklari.UI.ViewModels.Employee
 {
     public class EmployeeMainPageVM
     {
-        public PublicHolidayRoot PublicHoliday { get; set; }
+        public List<Resmitatiller> PublicHoliday { get; set; }
+        
     }
 }

@@ -14,7 +14,8 @@ namespace InsanKaynaklari.DataAccess.Configuration
         public void Configure(EntityTypeBuilder<PersonelDetail> builder)
         {
             builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50); 
-            builder.Property(x => x.LastName).IsRequired().HasMaxLength(50); 
+            builder.Property(x => x.LastName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Birthday).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(x => x.StartDate).IsRequired().HasDefaultValueSql("getdate()"); 
             builder.Property(x => x.EndDate).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(x => x.Wage).IsRequired();
