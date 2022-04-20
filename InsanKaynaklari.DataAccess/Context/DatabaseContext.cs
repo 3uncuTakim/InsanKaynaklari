@@ -6,6 +6,7 @@ namespace InsanKaynaklari.DataAccess.Context
 {
     public class DatabaseContext :DbContext
     {       
+        public DbSet<Event> Events { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Personel> Personels { get; set; }
         public DbSet<PersonelDetail> PersonelDetails { get; set; }
@@ -34,6 +35,12 @@ namespace InsanKaynaklari.DataAccess.Context
             modelBuilder.ApplyConfiguration(new ShiftMAP());
             modelBuilder.ApplyConfiguration(new AdvancePaymentMAP());
             modelBuilder.ApplyConfiguration(new CompanyMAP());
+
+            modelBuilder.Entity<PersonelEvent>().HasKey(p => new {p.EventID,p.PersonelID});
+            modelBuilder.Entity<PersonelEvent>().HasOne(p => p.Event).WithMany(p => p.PersonelEvents).HasForeignKey(p => p.EventID);
+            modelBuilder.Entity<PersonelEvent>().HasOne(p => p.Personel).WithMany(p => p.PersonelEvents).HasForeignKey(p => p.PersonelID);
+
+
         }
 
     }
