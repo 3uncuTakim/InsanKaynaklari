@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using InsanKaynaklari.Utilities.Mailing;
 using InsanKaynaklari.DataAccess.Context;
+using InsanKaynaklari.Business.Mailing;
 
 namespace InsanKaynaklari.UI.Controllers
 {

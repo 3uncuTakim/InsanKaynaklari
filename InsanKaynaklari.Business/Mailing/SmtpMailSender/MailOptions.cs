@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InsanKaynaklari.Utilities.Mailing.SmtpMailSender
+namespace InsanKaynaklari.Business.Mailing.SmtpMailSender
 {
     public class MailOptions
     {
