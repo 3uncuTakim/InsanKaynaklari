@@ -24,9 +24,9 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpPost]
         public IActionResult LogIn(LogInViewModel model, string yonlen)
         {
-            if (!ModelState.IsValid) return View();
+            /*if (!ModelState.IsValid)*/ return View();
+            
 
-           
 
         }
     }
