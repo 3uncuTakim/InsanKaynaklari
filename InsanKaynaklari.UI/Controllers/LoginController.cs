@@ -1,15 +1,18 @@
 ﻿using InsanKaynaklari.UI.ViewModels.Login;
 using Microsoft.AspNetCore.Mvc;
+using InsanKaynaklari.DataAccess.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InsanKaynaklari.Utilities.Mailing;
 
 namespace InsanKaynaklari.UI.Controllers
 {
     public class LoginController : Controller
     {
-       
+        private readonly DatabaseContext _context;
+        private readonly IMailService _mailService;
 
         public LoginController()
         {

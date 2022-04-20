@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace BlogProject.Utilities.Mailing
+namespace InsanKaynaklari.Utilities.Mailing
 {
     public class MailTemplate
     {

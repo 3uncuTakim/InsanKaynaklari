@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace BlogProject.Utilities.Mailing.SmtpMailSender
+namespace InsanKaynaklari.Utilities.Mailing.SmtpMailSender
 {
     public class SmtpMailService : IMailService
     {
