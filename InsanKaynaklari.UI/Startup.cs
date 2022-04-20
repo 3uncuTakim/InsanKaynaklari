@@ -1,5 +1,6 @@
 using InsanKaynaklari.Business.Mailing;
 using InsanKaynaklari.Business.Mailing.FakeMailSender;
+using InsanKaynaklari.Business.Mailing.SmtpMailSender;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +25,7 @@ namespace InsanKaynaklari.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<IMailService, SmtpMailService>();
+            services.AddScoped<IMailService, SmtpMailService>();
             services.AddScoped<IMailService, FakeMailSender>();
             services.AddControllersWithViews();
             services.AddSession();
