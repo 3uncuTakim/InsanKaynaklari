@@ -1,3 +1,5 @@
+using BlogProject.Utilities.Mailing;
+using BlogProject.Utilities.Mailing.FakeMailSender;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +24,10 @@ namespace InsanKaynaklari.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddScoped<IMailService, SmtpMailService>();
+            services.AddScoped<IMailService, FakeMailSender>();
             services.AddControllersWithViews();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +46,7 @@ namespace InsanKaynaklari.UI
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
