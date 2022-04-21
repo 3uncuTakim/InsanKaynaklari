@@ -31,7 +31,7 @@ namespace InsanKaynaklari.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));
+                var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));               
                 if (user is not null)
                 {
                     var name = _context.PersonelDetails.Where(x => x.ID == user.ID).FirstOrDefault();
@@ -47,6 +47,31 @@ namespace InsanKaynaklari.UI.Controllers
                 ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı");
             }
             return View();
+
+
+
+
+
+            //if (!ModelState.IsValid) return View();
+            //var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));
+            //var username = _context.PersonelDetails.Select(x => x.FirstName);
+            //var companyname = _context.Companies.Select(x => x.CompanyName);
+            //if (user is null)
+            //{
+            //    ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı!!");
+            //    return View();
+            //}
+
+            //HttpContext.Session.SetString("userId", user.ID.ToString());
+            //HttpContext.Session.SetString("username", username.ToString());
+            //HttpContext.Session.SetString("usercompany", companyname.ToString());
+
+            //if (string.IsNullOrEmpty(yonlen))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            //return Redirect(yonlen);
         }
 
         [Route("logout")]
