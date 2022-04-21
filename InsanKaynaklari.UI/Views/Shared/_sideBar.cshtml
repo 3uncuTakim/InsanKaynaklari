@@ -2,7 +2,7 @@
     @if (Context.Session.GetString("username") != null)
     {
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="Employee" asp-action="Index">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="Employee" asp-action="Index" asp-route-yonlen="/Employee/Index/@Context.Session.GetString("userId")">
             <div class="img-fluid">
                 <img src="https://unsplash.it/30/30" />
             </div>
@@ -37,10 +37,10 @@
             <a class="nav-link text-center" href="~/Calendar/Index">Takvim</a>
         </li>
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <hr class="sidebar-divider my-0">
 
         <li class="nav-item ">
-            <a class="nav-link text-center" href"#">Hesabım @Context.Session.GetString("username")</a>
+            <a class="nav-link text-center" href"#"> Hesabım @Context.Session.GetString("username")</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark btn btn-outline-danger ml-1" asp-area="" asp-controller="LogIn" asp-action="LogOut"> Log Out (@Context.Session.GetString("username"))</a>

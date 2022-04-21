@@ -3,14 +3,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>
+@*<h2>
     Welcome @Context.Session.GetString("username")
-</h2>
+</h2>*@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-4 ">
         <div class="col-xl-4 col-xs-12">
             <div class="card">
-                <img class="card-img-top w-100 " src="https://unsplash.it/100/100" />
+                <img class="card-img-top " src="https://unsplash.it/100/100" />
                 <div class="card-body">
                     <h2 class="card-header">İzin başlığı</h2>
 
@@ -24,8 +24,8 @@
                     <h2 class="card-header">Doğum günleri</h2>
                     @foreach (var item in Model.BirthDays)
                     {
-                        <ul>
-                            <li>@item.Birthday.ToString("dd/MMMM") -- @(item.Firstname +" "+ item.Lastname)</li>
+                        <ul class="list-group">
+                            <li class="list-group-item">@item.Birthday.ToString("dd/MMMM") -- @(item.Firstname +" "+ item.Lastname)</li>
                         </ul>
                     }
                 </div>

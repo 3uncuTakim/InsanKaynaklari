@@ -37,7 +37,6 @@ namespace InsanKaynaklari.UI.Controllers
                             join p in _context.Personels on c.ID equals p.CompanyID
                             join pd in _context.PersonelDetails on p.ID equals pd.ID
                             where c.CompanyName == HttpContext.Session.GetString("usercompany")
-                            orderby pd.Birthday
                             select new BirthDays { Firstname = pd.FirstName, Lastname = pd.LastName, Birthday = pd.Birthday }).ToList();
             var orderBirthday = (from dt in birthday
                                orderby BirthdayControl.IsBeforeNow(now, dt.Birthday), dt.Birthday.Month, dt.Birthday.Day
