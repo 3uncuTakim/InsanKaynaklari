@@ -1,4 +1,5 @@
-﻿using InsanKaynaklari.UI.API;
+﻿using BlogProject.Filters;
+using InsanKaynaklari.UI.API;
 using InsanKaynaklari.UI.ViewModels.Employee;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.UI.Controllers
 {
+    [LoggedUser]
+
     public class EmployeeController : Controller
     {
 
