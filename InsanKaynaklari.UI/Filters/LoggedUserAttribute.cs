@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace BlogProject.Filters
+namespace InsanKaynaklari.UI.Filters
 {
     public class LoggedUserAttribute:ActionFilterAttribute
     {
@@ -13,7 +13,7 @@ namespace BlogProject.Filters
             if (string.IsNullOrEmpty(userId))
             {
                 string routePath = context.HttpContext.Request.Path;
-                context.Result = new RedirectToActionResult("Index", "LogIn", new { yonlen = routePath });
+                context.Result = new RedirectToActionResult("Index", "Employee", new { yonlen = routePath });
             }
         }
     }

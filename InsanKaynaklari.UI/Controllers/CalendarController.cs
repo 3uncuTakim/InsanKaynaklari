@@ -1,4 +1,4 @@
-﻿using BlogProject.Filters;
+﻿using InsanKaynaklari.UI.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsanKaynaklari.UI.Controllers
