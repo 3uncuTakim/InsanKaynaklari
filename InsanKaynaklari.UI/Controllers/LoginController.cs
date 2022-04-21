@@ -39,7 +39,7 @@ namespace InsanKaynaklari.UI.Controllers
                     HttpContext.Session.SetString("userId", user.ID.ToString());
                     HttpContext.Session.SetString("username", name.FirstName.ToString());
                     HttpContext.Session.SetString("usercompany", company.CompanyName.ToString());
-                    return RedirectToAction("Index", "Employee");
+                    return RedirectToAction("Index", "Employee", new { Id = HttpContext.Session.GetString("userId") });
                 }
             }
             else

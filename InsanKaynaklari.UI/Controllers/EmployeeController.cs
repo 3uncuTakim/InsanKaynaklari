@@ -24,18 +24,18 @@ namespace InsanKaynaklari.UI.Controllers
             _context = context;
             
         }
-
-        public IActionResult Index()
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult Index(string id)
         {
             string json = new WebClient().DownloadString("https://api.ubilisim.com/resmitatiller/");
             PublicHolidayRoot publicHoliday = JsonConvert.DeserializeObject<PublicHolidayRoot>(json);
             var upcomingHoliday = publicHoliday.resmitatiller.Take(5).ToList();
-            //var list = _context.PersonelDetails.
+            var list = _context.PersonelDetails.Where(x => x.ID == Convert.ToInt32(id));
 
             EmployeeMainPageVM emp = new EmployeeMainPageVM
             {
                 PublicHoliday = upcomingHoliday,
-                //PersonelDetails = list
+                PersonelDetails = list.ToList()
                 
             };
             return View(emp);

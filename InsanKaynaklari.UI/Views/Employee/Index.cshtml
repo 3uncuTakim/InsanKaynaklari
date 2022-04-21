@@ -22,6 +22,12 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-header">Doğum günleri</h2>
+                    @foreach (var item in Model.PersonelDetails)
+                    {
+                        <ul>
+                            <li>@item.Birthday -- @(item.FirstName+" "+item.LastName)</li>
+                        </ul>
+                    }
                 </div>
             </div>
 
