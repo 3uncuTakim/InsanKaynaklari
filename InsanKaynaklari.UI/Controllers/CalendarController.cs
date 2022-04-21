@@ -1,5 +1,4 @@
-﻿using BlogProject.Filters;
-using InsanKaynaklari.DataAccess.Context;
+﻿using InsanKaynaklari.UI.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsanKaynaklari.UI.Controllers

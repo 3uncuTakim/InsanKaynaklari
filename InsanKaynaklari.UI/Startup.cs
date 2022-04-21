@@ -1,8 +1,10 @@
 using InsanKaynaklari.Business.Mailing;
 using InsanKaynaklari.Business.Mailing.FakeMailSender;
 using InsanKaynaklari.Business.Mailing.SmtpMailSender;
+using InsanKaynaklari.DataAccess.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +27,7 @@ namespace InsanKaynaklari.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer("Server=kolayikdb.database.windows.net; Database=HumanResources; User Id=Takim3ik; Password=Ad19955991;"));
             services.AddScoped<IMailService, SmtpMailService>();
             services.AddScoped<IMailService, FakeMailSender>();
             services.AddControllersWithViews();

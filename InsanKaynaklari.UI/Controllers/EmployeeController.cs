@@ -1,5 +1,5 @@
-﻿using BlogProject.Filters;
-using InsanKaynaklari.UI.API;
+﻿using InsanKaynaklari.UI.API;
+using InsanKaynaklari.UI.Filters;
 using InsanKaynaklari.UI.ViewModels.Employee;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

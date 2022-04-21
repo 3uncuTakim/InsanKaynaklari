@@ -49,5 +49,15 @@ namespace InsanKaynaklari.UI.Controllers
 
             return Redirect(yonlen);
         }
+
+        [Route("logout")]
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("userId");
+            HttpContext.Session.Remove("companyname");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

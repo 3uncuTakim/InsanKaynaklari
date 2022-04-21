@@ -1,6 +1,6 @@
 ﻿@model LogInViewModel
 @{
-    Layout = null;
+    ViewData["Title"] = "Login";
 }
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
                 <div class="middle">
                     <div id="login">
 
-                        <form action="javascript:void(0);" method="get">
+                        <form method="post" asp-controller="LogIn" asp-action="LogIn">
 
                             <fieldset class="clearfix">
 
