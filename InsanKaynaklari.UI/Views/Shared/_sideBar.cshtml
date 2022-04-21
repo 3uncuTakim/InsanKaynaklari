@@ -5,8 +5,12 @@
         <div class="img-fluid">
             <img src="https://unsplash.it/30/30" />
         </div>
+        @if (Context.Session.GetString("userId") != null)
+        {
+            <div class="sidebar-brand-text mx-3">@Context.Session.GetString("usercompany")</div>
 
-        <div class="sidebar-brand-text mx-3">Company Name</div>
+        }
+
     </a>
 
     <!-- Divider -->
@@ -57,7 +61,7 @@
     <hr class="sidebar-divider d-none d-md-block">
 
     <li class="nav-item ">
-        <a class="nav-link text-center" href"#">Hesabım</a>
+        <a class="nav-link text-center" href"#">Hesabım @Context.Session.GetString("username")</a>
     </li>
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

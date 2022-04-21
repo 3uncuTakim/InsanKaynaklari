@@ -40,6 +40,7 @@ namespace InsanKaynaklari.UI.Controllers
 
             HttpContext.Session.SetString("userId", user.PersonelDetail.ID.ToString());
             HttpContext.Session.SetString("username", user.PersonelDetail.FirstName);
+            HttpContext.Session.SetString("usercompany", user.Company.CompanyName);
 
             if (string.IsNullOrEmpty(yonlen))
             {
