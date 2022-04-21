@@ -1,4 +1,5 @@
-﻿using InsanKaynaklari.UI.API;
+﻿using InsanKaynaklari.Entities.Concrete;
+using InsanKaynaklari.UI.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace InsanKaynaklari.UI.ViewModels.Employee
     public class EmployeeMainPageVM
     {
         public List<Resmitatiller> PublicHoliday { get; set; }
-        
+        public PersonelDetail PersonelDetails { get; set; }
+
     }
 }
