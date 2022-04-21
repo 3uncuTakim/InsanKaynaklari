@@ -10,7 +10,7 @@ namespace InsanKaynaklari.UI.ViewModels.Employee
     public class EmployeeMainPageVM
     {
         public List<Resmitatiller> PublicHoliday { get; set; }
-        public PersonelDetail PersonelDetails { get; set; }
+        public List<PersonelDetail> PersonelDetails { get; set; }
 
     }
 }

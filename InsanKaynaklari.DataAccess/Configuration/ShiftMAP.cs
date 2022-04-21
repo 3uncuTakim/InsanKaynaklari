@@ -17,6 +17,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(s => s.StartOfShift).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(s => s.EndOfShift).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(s => s.Description).IsRequired().HasMaxLength(500);
+            builder.Property(s => s.PersonelID).IsRequired();
         }
     }
 }

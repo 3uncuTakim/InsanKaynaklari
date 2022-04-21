@@ -30,12 +30,12 @@ namespace InsanKaynaklari.UI.Controllers
             string json = new WebClient().DownloadString("https://api.ubilisim.com/resmitatiller/");
             PublicHolidayRoot publicHoliday = JsonConvert.DeserializeObject<PublicHolidayRoot>(json);
             var upcomingHoliday = publicHoliday.resmitatiller.Take(5).ToList();
-
+            //var list = _context.PersonelDetails.
 
             EmployeeMainPageVM emp = new EmployeeMainPageVM
             {
                 PublicHoliday = upcomingHoliday,
-                //PersonelDetails =
+                //PersonelDetails = list
                 
             };
             return View(emp);

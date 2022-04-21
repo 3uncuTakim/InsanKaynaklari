@@ -20,6 +20,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(x => x.Description).HasMaxLength(250);
             builder.Property(x => x.TaskStatus).IsRequired();
             builder.Property(x => x.LeaveTypeID).IsRequired();
+            builder.Property(x => x.PersonelID).IsRequired();
         }
     }
 }
