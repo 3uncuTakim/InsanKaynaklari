@@ -1,6 +1,6 @@
 ﻿@model LogInViewModel
 @{
-    ViewData["Title"] = "Login";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -32,12 +32,12 @@
                 <div class="middle">
                     <div id="login">
 
-                        <form method="post" asp-controller="LogIn" asp-action="LogIn">
+                        <form method="post" asp-controller="LogIn" asp-action="LogIn" asp-route-yonlen="@ViewBag.yonlen">
 
                             <fieldset class="clearfix">
 
-                                <p><span class="fa fa-user"></span><input type="text" Placeholder="Email" required></p>
-                                <p><span class="fa fa-lock"></span><input type="password" Placeholder="Password" required></p>
+                                <p><span class="fa fa-user"></span><input asp-for="Email" placeholder="Email" type="email" required></p>
+                                <p><span class="fa fa-lock"></span><input asp-for="Password" placeholder="Password" type="password" required></p>
 
                                 <div>
                                     <span style="width:48%; text-align:left;  display: inline-block;">

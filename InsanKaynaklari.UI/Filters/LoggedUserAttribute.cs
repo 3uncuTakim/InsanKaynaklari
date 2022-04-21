@@ -13,7 +13,7 @@ namespace InsanKaynaklari.UI.Filters
             if (string.IsNullOrEmpty(userId))
             {
                 string routePath = context.HttpContext.Request.Path;
-                context.Result = new RedirectToActionResult("Index", "Employee", new { yonlen = routePath });
+                context.Result = new RedirectToActionResult("LogIn", "Login", new { yonlen = routePath });
             }
         }
     }

@@ -29,25 +29,25 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpPost]
         public IActionResult LogIn(LogInViewModel model, string yonlen)
         {
-            if (!ModelState.IsValid) return View();
-            var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));
-
-            if (user is null)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı!!");
-                return View();
+                var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));               
+                if (user is not null)
+                {
+                    var name = _context.PersonelDetails.Where(x => x.ID == user.ID).FirstOrDefault();
+                    var company = _context.Companies.Where(x => x.ID == user.CompanyID).FirstOrDefault();
+                    HttpContext.Session.SetString("userId", user.ID.ToString());
+                    HttpContext.Session.SetString("username", name.FirstName.ToString());
+                    HttpContext.Session.SetString("usercompany", company.CompanyName.ToString());
+                    return RedirectToAction("Index", "Employee");
+                }
             }
-
-            HttpContext.Session.SetString("userId", user.PersonelDetail.ID.ToString());
-            HttpContext.Session.SetString("username", user.PersonelDetail.FirstName);
-            HttpContext.Session.SetString("usercompany", user.Company.CompanyName);
-
-            if (string.IsNullOrEmpty(yonlen))
+            else
             {
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı");
             }
+            return View();
 
-            return Redirect(yonlen);
         }
 
         [Route("logout")]

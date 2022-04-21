@@ -15,7 +15,7 @@ namespace InsanKaynaklari.UI.Controllers
 
     public class EmployeeController : Controller
     {
-
+        
         public IActionResult Index()
         {
             string json = new WebClient().DownloadString("https://api.ubilisim.com/resmitatiller/");
