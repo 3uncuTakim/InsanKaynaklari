@@ -5,8 +5,12 @@
         <div class="img-fluid">
             <img src="https://unsplash.it/30/30" />
         </div>
+        @if (Context.Session.GetString("userId") != null)
+        {
+            <div class="sidebar-brand-text mx-3">@Context.Session.GetString("usercompany")</div>
 
-        <div class="sidebar-brand-text mx-3">Company Name</div>
+        }
+
     </a>
 
     <!-- Divider -->
