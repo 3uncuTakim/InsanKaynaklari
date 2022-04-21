@@ -18,7 +18,7 @@ namespace InsanKaynaklari.Entities.Concrete
         public string Address { get; set; }
         public string WorkStyle { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         //Relational  Properties Begin
         //one to one with Personel
         public virtual Personel Personel { get; set; }
