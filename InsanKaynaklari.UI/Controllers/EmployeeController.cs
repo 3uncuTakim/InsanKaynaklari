@@ -41,10 +41,15 @@ namespace InsanKaynaklari.UI.Controllers
             var orderBirthday = (from dt in birthday
                                orderby BirthdayControl.IsBeforeNow(now, dt.Birthday), dt.Birthday.Month, dt.Birthday.Day
                                select dt).Take(5).ToList();
+            var personelLeaves = (from l in _context.Leaves
+                                  join lt in _context.LeaveTypes on l.LeaveTypeID equals lt.ID
+                                  where l.PersonelID == Convert.ToInt32(id) && (l.StartLeaveDate  > now && l.StartLeaveDate < now.AddMonths(1))
+                                  select new Leavelist { LeaveTypeName = lt.TypeName, LeaveDuration = l.TotalDaysOff, LeaveStartDate = l.StartLeaveDate }).ToList();
             EmployeeMainPageVM emp = new EmployeeMainPageVM
             {
                 PublicHoliday = upcomingHoliday,
-                BirthDays=orderBirthday
+                BirthDays=orderBirthday,
+                Leaves=personelLeaves
                 
             };
             return View(emp);

@@ -11,6 +11,7 @@ namespace InsanKaynaklari.UI.ViewModels.Employee
     {
         public List<Resmitatiller> PublicHoliday { get; set; }
         public  List<BirthDays>BirthDays { get; set; }
+        public List<Leavelist> Leaves { get; set; }
 
     }
     public class BirthDays
@@ -18,5 +19,12 @@ namespace InsanKaynaklari.UI.ViewModels.Employee
         public DateTime Birthday { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+    }
+
+    public class Leavelist
+    {
+        public string LeaveTypeName { get; set; }
+        public int LeaveDuration { get; set; }
+        public DateTime LeaveStartDate { get; set; }
     }
 }
