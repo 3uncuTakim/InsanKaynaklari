@@ -16,7 +16,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(x => x.CheckDocument).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Amount).IsRequired();
             builder.Property(x => x.Explanation).IsRequired().HasMaxLength(250);
-            builder.Property(x => x.TaskStatus).IsRequired();
+            builder.Property(x => x.ConfirmStatus).IsRequired();
             builder.Property(x => x.ExpenseTypeID).IsRequired();
             builder.Property(x => x.PersonelID).IsRequired();
         }

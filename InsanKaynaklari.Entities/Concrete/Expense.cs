@@ -1,4 +1,5 @@
 ﻿using InsanKaynaklari.Entities.Abstract;
+using InsanKaynaklari.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace InsanKaynaklari.Entities.Concrete
         public string CheckDocument  { get; set; }        
         public int Amount { get; set; }
         public string Explanation { get; set; }
-        public TaskStatus TaskStatus { get; set; }
+        public ConfirmStatus ConfirmStatus { get; set; }
 
         //Relational  Properties Begin
 

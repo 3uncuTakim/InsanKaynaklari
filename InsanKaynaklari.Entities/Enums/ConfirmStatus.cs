@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.Entities.Enums
 {
-    public enum TaskStatus
+    public enum ConfirmStatus
     {
         OnHold=1,
         Accepted=2,

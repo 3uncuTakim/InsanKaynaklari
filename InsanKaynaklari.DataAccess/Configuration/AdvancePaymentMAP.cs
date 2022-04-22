@@ -16,7 +16,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(x => x.Amount).IsRequired();
             builder.Property(x => x.DateOfIssue).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
-            builder.Property(x => x.TaskStatus).IsRequired();
+            builder.Property(x => x.ConfirmStatus).IsRequired();
             builder.Property(x => x.PersonelID).IsRequired();           
         }
     }

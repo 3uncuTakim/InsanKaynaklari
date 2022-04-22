@@ -18,7 +18,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(x => x.StartLeaveDate).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(x => x.EndLeaveDate).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(x => x.Description).HasMaxLength(250);
-            builder.Property(x => x.TaskStatus).IsRequired();
+            builder.Property(x => x.ConfirmStatus).IsRequired();
             builder.Property(x => x.LeaveTypeID).IsRequired();
             builder.Property(x => x.PersonelID).IsRequired();
         }
