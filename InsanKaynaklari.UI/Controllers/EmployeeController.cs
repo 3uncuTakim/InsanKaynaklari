@@ -28,10 +28,7 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult Index(string id)
         {
-            
-            string json = new WebClient().DownloadString("https://api.ubilisim.com/resmitatiller/");
-            PublicHolidayRoot publicHoliday = JsonConvert.DeserializeObject<PublicHolidayRoot>(json);
-            var upcomingHoliday = publicHoliday.resmitatiller.Take(5).ToList();
+            var getHoliday = GetHolidays.GetPublicHoliday().Take(5).ToList();         
             var now = DateTime.Now;
             var birthday =  (from c in _context.Companies
                             join p in _context.Personels on c.ID equals p.CompanyID
@@ -47,7 +44,7 @@ namespace InsanKaynaklari.UI.Controllers
                                   select new Leavelist { LeaveTypeName = lt.TypeName, LeaveDuration = l.TotalDaysOff, LeaveStartDate = l.StartLeaveDate }).ToList();
             EmployeeMainPageVM emp = new EmployeeMainPageVM
             {
-                PublicHoliday = upcomingHoliday,
+                PublicHoliday = getHoliday,
                 BirthDays=orderBirthday,
                 Leaves=personelLeaves
                 

@@ -13,6 +13,8 @@ namespace InsanKaynaklari.UI.API
         public string haftagunu { get; set; }
         public string tarih { get; set; }
         public string uzuntarih { get; set; }
+
+        
     }
 
     public class PublicHolidayRoot
