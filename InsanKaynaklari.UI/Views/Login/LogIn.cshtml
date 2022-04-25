@@ -31,14 +31,27 @@
             <center>
                 <div class="middle">
                     <div id="login">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @if (TempData["message"] != null)
+                        {
+                            <div class="text-success">@TempData["message"]</div>
+                        }
+
+                        @if (TempData["ActivationKeyMessage"] != null)
+                        {
+                            <div>@TempData["ActivationKeyMessage"]</div>
+                        }
 
                         <form method="post" asp-controller="LogIn" asp-action="LogIn" asp-route-yonlen="@ViewBag.yonlen">
 
                             <fieldset class="clearfix">
 
                                 <p><span class="fa fa-user"></span><input asp-for="Email" placeholder="Email" type="email" required></p>
+                                <span asp-validation-for="Email" class="text-danger"></span>
                                 <p><span class="fa fa-lock"></span><input asp-for="Password" placeholder="Password" type="password" required></p>
+                                <span asp-validation-for="Password" class="text-danger"></span>
 
+                                <p><span></span></p>
                                 <div>
                                     <span style="width:48%; text-align:left;  display: inline-block;">
                                         <a class="small-text" href="#">
