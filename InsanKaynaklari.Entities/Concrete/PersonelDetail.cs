@@ -13,6 +13,7 @@ namespace InsanKaynaklari.Entities.Concrete
         public string LastName { get; set; }
         public string Department { get; set; }
         public string Title { get; set; }
+        public string Picture { get; set; }
         public decimal Wage { get; set; }
         public DateTime Birthday { get; set; }
         public string Address { get; set; }

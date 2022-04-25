@@ -19,6 +19,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(x => x.StartDate).IsRequired().HasDefaultValueSql("getdate()"); 
             builder.Property(x => x.Wage).IsRequired();
             builder.Property(x => x.WorkStyle).HasMaxLength(20);
+            builder.Property(x => x.Picture).IsRequired();
         }
     }
 }
