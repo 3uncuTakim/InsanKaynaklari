@@ -31,21 +31,32 @@ namespace InsanKaynaklari.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));               
+                var user = _context.Personels.FirstOrDefault(x => x.Email.Equals(model.Email) && x.Password.Equals(model.Password));
                 if (user is not null)
                 {
+                    if (user.Activation!=true)
+                    {
+                        ModelState.AddModelError("", "Kullanici aktif değildir");
+                        return View();
+                    }
+                    else
+                    {
                     var name = _context.PersonelDetails.Where(x => x.ID == user.ID).FirstOrDefault();
                     var company = _context.Companies.Where(x => x.ID == user.CompanyID).FirstOrDefault();
                     HttpContext.Session.SetString("userId", user.ID.ToString());
                     HttpContext.Session.SetString("username", name.FirstName.ToString());
                     HttpContext.Session.SetString("usercompany", company.CompanyName.ToString());
                     return RedirectToAction("Index", "Employee", new { Id = HttpContext.Session.GetString("userId") });
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Kullanıcı veya şifre hatalı");
+                    return View();
                 }
             }
-            else
-            {
-                ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı");
-            }
+           
             return View();
 
         }
