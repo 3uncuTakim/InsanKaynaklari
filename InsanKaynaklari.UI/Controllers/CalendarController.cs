@@ -18,11 +18,12 @@ namespace InsanKaynaklari.UI.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult Index(string id)
         {
             return View();
         }
-        public IActionResult GetAllEvent()
+        public IActionResult GetAllEvent(string id)
         {
             List<Resmitatiller> holidays= GetHolidays.GetPublicHoliday().ToList();
             List<Event> events = new List<Event>();
@@ -38,7 +39,7 @@ namespace InsanKaynaklari.UI.Controllers
                 events.Add(holidayList);
 
             };
-            
+        
             var allEvent = _context.Events.ToList();
             allEvent.AddRange(events);
             return new JsonResult(allEvent);

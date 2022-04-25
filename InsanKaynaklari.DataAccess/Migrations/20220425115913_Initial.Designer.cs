@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsanKaynaklari.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220421123007_DateUpdate")]
-    partial class DateUpdate
+    [Migration("20220425115913_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ConfirmStatus")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateOfIssue")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -42,9 +45,6 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("PersonelID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskStatus")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -95,9 +95,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .HasDefaultValueSql("getdate()");
 
                     b.Property<DateTime?>("DateOfReturn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DebitCode")
                         .HasMaxLength(50)
@@ -164,6 +162,9 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("ConfirmStatus")
+                        .HasColumnType("int");
+
                     b.Property<int>("ExpenseTypeID")
                         .HasColumnType("int");
 
@@ -173,9 +174,6 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<int>("PersonelID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskStatus")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -211,6 +209,9 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ConfirmStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
@@ -234,9 +235,6 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
-
-                    b.Property<int>("TaskStatus")
-                        .HasColumnType("int");
 
                     b.Property<int>("TotalDaysOff")
                         .HasColumnType("int");
@@ -320,9 +318,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("EndDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -333,6 +329,10 @@ namespace InsanKaynaklari.DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Picture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
@@ -366,7 +366,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
 
                     b.HasIndex("PersonelID");
 
-                    b.ToTable("PersonelEvent");
+                    b.ToTable("PersonelEvents");
                 });
 
             modelBuilder.Entity("InsanKaynaklari.Entities.Concrete.Shift", b =>

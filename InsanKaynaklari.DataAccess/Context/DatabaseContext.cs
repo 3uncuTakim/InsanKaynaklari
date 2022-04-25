@@ -25,6 +25,8 @@ namespace InsanKaynaklari.DataAccess.Context
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
+        public DbSet<PersonelEvent> PersonelEvents { get; set; }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,10 +45,9 @@ namespace InsanKaynaklari.DataAccess.Context
             modelBuilder.ApplyConfiguration(new ShiftMAP());
             modelBuilder.ApplyConfiguration(new AdvancePaymentMAP());
             modelBuilder.ApplyConfiguration(new CompanyMAP());
+            modelBuilder.ApplyConfiguration(new PersonelEventMAP());
 
-            modelBuilder.Entity<PersonelEvent>().HasKey(p => new {p.EventID,p.PersonelID});
-            modelBuilder.Entity<PersonelEvent>().HasOne(p => p.Event).WithMany(p => p.PersonelEvents).HasForeignKey(p => p.EventID);
-            modelBuilder.Entity<PersonelEvent>().HasOne(p => p.Personel).WithMany(p => p.PersonelEvents).HasForeignKey(p => p.PersonelID);
+            
 
 
         }

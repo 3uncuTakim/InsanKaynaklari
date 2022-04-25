@@ -364,7 +364,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
 
                     b.HasIndex("PersonelID");
 
-                    b.ToTable("PersonelEvent");
+                    b.ToTable("PersonelEvents");
                 });
 
             modelBuilder.Entity("InsanKaynaklari.Entities.Concrete.Shift", b =>

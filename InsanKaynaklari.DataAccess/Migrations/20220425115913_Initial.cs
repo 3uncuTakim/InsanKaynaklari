@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InsanKaynaklari.DataAccess.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +21,23 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Start = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    End = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TextColor = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,7 +98,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DateOfIssue = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    TaskStatus = table.Column<int>(type: "int", nullable: false),
+                    ConfirmStatus = table.Column<int>(type: "int", nullable: false),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -104,7 +121,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     DebitName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DebitCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     DateOfIssue = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
-                    DateOfReturn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    DateOfReturn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -128,7 +145,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     CheckDocument = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     Explanation = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    TaskStatus = table.Column<int>(type: "int", nullable: false),
+                    ConfirmStatus = table.Column<int>(type: "int", nullable: false),
                     ExpenseTypeID = table.Column<int>(type: "int", nullable: false),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -160,7 +177,7 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     StartLeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
                     EndLeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    TaskStatus = table.Column<int>(type: "int", nullable: false),
+                    ConfirmStatus = table.Column<int>(type: "int", nullable: false),
                     LeaveTypeID = table.Column<int>(type: "int", nullable: false),
                     PersonelID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -190,11 +207,13 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Wage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WorkStyle = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,6 +221,30 @@ namespace InsanKaynaklari.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_PersonelDetails_Personels_ID",
                         column: x => x.ID,
+                        principalTable: "Personels",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonelEvents",
+                columns: table => new
+                {
+                    EventID = table.Column<int>(type: "int", nullable: false),
+                    PersonelID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonelEvents", x => new { x.EventID, x.PersonelID });
+                    table.ForeignKey(
+                        name: "FK_PersonelEvents_Events_EventID",
+                        column: x => x.EventID,
+                        principalTable: "Events",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonelEvents_Personels_PersonelID",
+                        column: x => x.PersonelID,
                         principalTable: "Personels",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -261,6 +304,11 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 column: "PersonelID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PersonelEvents_PersonelID",
+                table: "PersonelEvents",
+                column: "PersonelID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Personels_CompanyID",
                 table: "Personels",
                 column: "CompanyID");
@@ -295,6 +343,9 @@ namespace InsanKaynaklari.DataAccess.Migrations
                 name: "PersonelDetails");
 
             migrationBuilder.DropTable(
+                name: "PersonelEvents");
+
+            migrationBuilder.DropTable(
                 name: "Shifts");
 
             migrationBuilder.DropTable(
@@ -302,6 +353,9 @@ namespace InsanKaynaklari.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "LeaveTypes");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Personels");
