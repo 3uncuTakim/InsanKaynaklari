@@ -23,6 +23,7 @@ namespace InsanKaynaklari.UI.Controllers
         {
             return View();
         }
+        [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult GetAllEvent(string id)
         {
             List<Resmitatiller> holidays= GetHolidays.GetPublicHoliday().ToList();
@@ -39,8 +40,12 @@ namespace InsanKaynaklari.UI.Controllers
                 events.Add(holidayList);
 
             };
-        
-            var allEvent = _context.Events.ToList();
+            List<Event> allEvent = (from e in _context.Events
+                       join pe in _context.PersonelEvents on e.ID equals pe.EventID
+                       join p in _context.Personels on pe.PersonelID equals p.ID
+                       where pe.PersonelID == Convert.ToInt32(id)
+                       select new Event { ID = e.ID, Start = e.Start, Color = e.Color, End = e.End, TextColor = e.TextColor, Title = e.Title }).ToList();
+            //var allEvent = _context.Events.ToList();
             allEvent.AddRange(events);
             return new JsonResult(allEvent);
         }
