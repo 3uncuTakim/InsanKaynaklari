@@ -31,7 +31,7 @@ namespace InsanKaynaklari.UI
 
                     q.AddTrigger(opts => opts
                         .ForJob(jobKey)
-                        .WithCronSchedule("0 0 12 * * ?"));
+                        .WithCronSchedule("0/5 * * * * ?"));
 
                 });
                 services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);

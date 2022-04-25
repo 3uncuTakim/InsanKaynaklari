@@ -40,10 +40,10 @@
         <hr class="sidebar-divider my-0">
 
         <li class="nav-item ">
-            <a class="nav-link text-center" href"#"> Hesabım @Context.Session.GetString("username")</a>
+            <a class="nav-link text-center" href="#"> Hesabım @Context.Session.GetString("username")</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark btn btn-outline-danger ml-1" asp-area="" asp-controller="LogIn" asp-action="LogOut"> Log Out (@Context.Session.GetString("username"))</a>
+            <a class="nav-link text-dark btn btn-danger" asp-area="" asp-controller="LogIn" asp-action="LogOut"> Log Out (@Context.Session.GetString("username"))</a>
         </li>
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

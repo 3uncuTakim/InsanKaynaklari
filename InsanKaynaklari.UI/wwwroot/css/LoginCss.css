@@ -131,7 +131,7 @@ fieldset {
     margin: 0;
 }
 
-#login form input[type="text"], input[type="password"] {
+#login form input[type="email"], input[type="password"] {
     background-color: #fff;
     border-radius: 0px 3px 3px 0px;
     color: #000;
