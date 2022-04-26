@@ -27,6 +27,7 @@ namespace InsanKaynaklari.UI.Controllers
             var profile = _context.PersonelDetails.Where(x => x.ID == Convert.ToInt32(id)).Select(x => new EmployeeProfileVM
             {
                 ID=x.ID,
+                Email=x.Personel.Email,
                 FirstName=x.FirstName,
                 LastName=x.LastName,
                 Birthday=x.Birthday,
