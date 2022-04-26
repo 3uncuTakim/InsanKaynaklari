@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table class="table-hover">
+<table class="table table-hover">
     <thead>
         <tr>
             <td>FirstName</td>
@@ -13,9 +13,9 @@
             <td>Adress</td>
             <td>Title</td>
             <td>Department</td>
-            <td>Title</td>
             <td>Workstyle</td>
             <td>StartDate</td>
+            <td>Picture</td>
         </tr>
 
     </thead>
@@ -25,11 +25,12 @@
             <td>@Model.LastName</td>
             <td>@Model.Birthday</td>
             <td>@Model.Address</td>
-            <td>@Model.Department</td>
             <td>@Model.Title</td>
+            <td>@Model.Department</td>
             <td>@Model.WorkStyle</td>
             <td>@Model.StartDate</td>
-         
+            <td>@Model.Picture</td>
+
         </tr>
     </tbody>
 </table>

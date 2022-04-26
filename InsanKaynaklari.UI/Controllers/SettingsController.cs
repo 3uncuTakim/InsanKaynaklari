@@ -38,7 +38,7 @@ namespace InsanKaynaklari.UI.Controllers
                 Picture= string.IsNullOrEmpty(x.Picture) ? "null.png" : x.Picture
             }).FirstOrDefault();
             
-            return View();
+            return View(profile);
         }
     }
 }
