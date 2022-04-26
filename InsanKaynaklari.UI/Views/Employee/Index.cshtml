@@ -3,15 +3,16 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
 <h2>
     Welcome @Context.Session.GetString("username")
 </h2>
 <div class="container-fluid">
     <div class="row mt-4 ">
         <div class="col-xl-4 col-xs-12">
-            <div class="card">              
+            <div class="card">
+                <h2 class="card-header" style="text-decoration-color:initial; color:#ff0000; font-weight:1000; font-family:sans-serif;">Yaklaşan İzinler</h2>
                 <div class="card-body">
-                    <div class="card-header">Yaklaşan izinler</div>
                     @if (Model.Leaves.Count > 0)
                     {
                         foreach (var item in Model.Leaves)
@@ -34,8 +35,8 @@
         </div>
         <div class="col-xl-4 col-xs-12">
             <div class="card">
+                <h2 class="card-header">Doğum Günleri</h2>
                 <div class="card-body">
-                    <h2 class="card-header">Doğum günleri</h2>
                     @foreach (var item in Model.BirthDays)
                     {
                         <ul class="list-group">

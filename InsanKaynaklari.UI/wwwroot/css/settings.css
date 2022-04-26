@@ -1,11 +1,12 @@
 ﻿body {
-    margin-top: 20px;
+    margin-top: 0px;
     color: #1a202c;
     text-align: left;
     background-color: #e2e8f0;
 }
 
 .main-body {
+    margin-top:0px;
     padding: 15px;
 }
 
