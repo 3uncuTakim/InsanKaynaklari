@@ -1,0 +1,36 @@
+﻿@model EmployeeProfileVM
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table-hover">
+    <thead>
+        <tr>
+            <td>FirstName</td>
+            <td>LastName</td>
+            <td>Birthday</td>
+            <td>Adress</td>
+            <td>Title</td>
+            <td>Department</td>
+            <td>Title</td>
+            <td>Workstyle</td>
+            <td>StartDate</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.FirstName</td>
+            <td>@Model.LastName</td>
+            <td>@Model.Birthday</td>
+            <td>@Model.Address</td>
+            <td>@Model.Department</td>
+            <td>@Model.Title</td>
+            <td>@Model.WorkStyle</td>
+            <td>@Model.StartDate</td>
+         
+        </tr>
+    </tbody>
+</table>
+

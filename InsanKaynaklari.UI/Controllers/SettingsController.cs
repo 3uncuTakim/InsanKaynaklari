@@ -1,6 +1,7 @@
 ﻿using InsanKaynaklari.DataAccess.Context;
+using InsanKaynaklari.Entities.Concrete;
 using InsanKaynaklari.UI.Filters;
-using InsanKaynaklari.UI.ViewModels.Auth.Settings;
+using InsanKaynaklari.UI.ViewModels.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.UI.Controllers
 {
+    [LoggedUser]
     public class SettingsController : Controller
     {
         private readonly DatabaseContext _context;
@@ -19,17 +21,23 @@ namespace InsanKaynaklari.UI.Controllers
         {
             _context = context;
         }
-        [LoggedUser]
-        public IActionResult Settings(SettingsViewModel settings)
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult Profile(string id)
         {
-
-            if (ModelState.IsValid)
+            var profile = _context.PersonelDetails.Where(x => x.ID == Convert.ToInt32(id)).Select(x => new EmployeeProfileVM
             {
-                var user = _context.PersonelDetails.FirstOrDefault(p=>p.ID.Equals(settings.Id) &&
-                    p.ID.ToString().Equals(HttpContext.Session.GetString("userId")));
-                user.Personel.Email
-
-            }
+                ID=x.ID,
+                FirstName=x.FirstName,
+                LastName=x.LastName,
+                Birthday=x.Birthday,
+                Address=x.Address,
+                Department=x.Department,
+                StartDate=x.StartDate,
+                Title=x.Title,
+                WorkStyle=x.WorkStyle,
+                Picture= string.IsNullOrEmpty(x.Picture) ? "null.png" : x.Picture
+            }).FirstOrDefault();
+            
             return View();
         }
     }
