@@ -2,7 +2,7 @@
     @if (Context.Session.GetString("username") != null)
     {
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="Employee" asp-action="Index" asp-route-yonlen="/Employee/Index/@Context.Session.GetString("userId")">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href ="~/Employee/Index/@Context.Session.GetString("userId")">
             <div class="img-fluid">
                 <img src="https://unsplash.it/30/30" />
             </div>
