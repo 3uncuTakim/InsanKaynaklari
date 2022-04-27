@@ -8,15 +8,14 @@ using InsanKaynaklari.DataAccess.Context;
 using InsanKaynaklari.DataAccess.Repository.IRepository;
 using InsanKaynaklari.Entities.Concrete;
 
-namespace InsanKaynaklari.Business.Repository.Concrete
-{
+namespace InsanKaynaklari.Business.Manager.Concrete
+{ 
     public class AdvancePaymentManager : BaseManager<AdvancePayment>
     {
-        private readonly IGenericRepository<AdvancePayment> _genericRepository;
 
-        public AdvancePaymentManager(IGenericRepository<AdvancePayment> genericRepository,DatabaseContext context):base(context)
+        public AdvancePaymentManager(DatabaseContext context):base(context)
         {
-            _genericRepository = genericRepository;
+
         }
     }
 }

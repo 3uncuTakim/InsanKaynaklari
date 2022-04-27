@@ -18,5 +18,20 @@ namespace InsanKaynaklari.API.Controllers
         {
             _advancePaymentService = advancePaymentService;
         }
+        [HttpGet("{id}")]
+        public IActionResult GetPersonel(int id)
+        {
+            var advPayment = _advancePaymentService.GetAllAsync(x=>x.PersonelID==id);
+           
+            return Ok(advPayment);
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetAdvancePayment(int id)
+        {
+            var advPayment = _advancePaymentService.GetAllAsync(x => x.ID == id);
+
+            return Ok(advPayment);
+        }
+
     }
 }
