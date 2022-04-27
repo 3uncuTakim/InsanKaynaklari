@@ -13,9 +13,6 @@ namespace InsanKaynaklari.Business.Manager.Concrete
     public class AdvancePaymentManager : BaseManager<AdvancePayment>
     {
 
-        public AdvancePaymentManager(DatabaseContext context):base(context)
-        {
-
-        }
+        
     }
 }

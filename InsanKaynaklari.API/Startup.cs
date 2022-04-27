@@ -31,7 +31,7 @@ namespace InsanKaynaklari.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IAdvancePaymentRepository, AdvancePaymentRepository>();
-            services.AddScoped<IAdvancePaymentService, AdvancePaymentManager>();
+            //services.AddScoped<IAdvancePaymentService, AdvancePaymentManager>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

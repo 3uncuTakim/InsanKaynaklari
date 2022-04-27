@@ -1,5 +1,6 @@
 ﻿using InsanKaynaklari.Business.Manager.Abstract;
 using InsanKaynaklari.DataAccess.Context;
+using InsanKaynaklari.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,33 +13,58 @@ namespace InsanKaynaklari.Business.Manager.Base
 {
     public class BaseManager<T> : IGeneralService<T> where T : class
     {
-        readonly DatabaseContext _context;
-        public BaseManager(DatabaseContext context)
+        //private readonly IGenericRepository<T> _context;
+        //public BaseManager(IGenericRepository<T> context)
+        //{
+        //    _context=context;
+        //}
+
+        //public async Task Add(T entity)
+        //{
+        //    await _context.Add(entity);
+        //    await _context.SaveChanges();
+        //}
+
+        //public async Task Delete(int id)
+        //{
+        //    var entity = await GetById(id);
+        //    _context.Set<T>().Remove(entity);
+        //    await _context.SaveChangesAsync();
+        //}
+
+        //public async Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
+        //{
+        //    IQueryable<T> query = _context.Set<T>();
+        //    if (predicate != null)
+        //    {
+        //        query = query.Where(predicate);
+        //    }
+        //    return await query.ToListAsync();
+        //}
+
+        //public Task<T> GetById(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public async Task Update(int id, T entity)
+        //{
+        //    _context.Set<T>().Update(entity);
+        //    await _context.SaveChangesAsync();
+        //}
+        public Task Add(T entity)
         {
-            _context = context;
+            throw new NotImplementedException();
         }
 
-        public async Task Add(T entity)
+        public Task Delete(int id)
         {
-            await _context.Set<T>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task Delete(int id)
+        public Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
         {
-            var entity = await GetById(id);
-            _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
-        {
-            IQueryable<T> query = _context.Set<T>();
-            if (predicate != null)
-            {
-                query = query.Where(predicate);
-            }
-            return await query.ToListAsync();
+            throw new NotImplementedException();
         }
 
         public Task<T> GetById(int id)
@@ -46,10 +72,9 @@ namespace InsanKaynaklari.Business.Manager.Base
             throw new NotImplementedException();
         }
 
-        public async Task Update(int id, T entity)
+        public Task Update(int id, T entity)
         {
-            _context.Set<T>().Update(entity);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }
