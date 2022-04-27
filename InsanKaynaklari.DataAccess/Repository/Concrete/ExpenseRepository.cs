@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InsanKaynaklari.DataAccess.Repository.Abstract;
 
 namespace InsanKaynaklari.DataAccess.Repository.Concrete
 {
-    public class ExpenseRepository:BaseRepository<Expense>
+    public class ExpenseRepository:BaseRepository<Expense>, IExpenseRepository
     {
         public ExpenseRepository(DatabaseContext context):base(context)
         {
