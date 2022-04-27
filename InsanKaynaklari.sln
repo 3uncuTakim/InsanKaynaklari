@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsanKaynaklari.DataAccess"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsanKaynaklari.UI", "InsanKaynaklari.UI\InsanKaynaklari.UI.csproj", "{8C0B2443-715A-4D58-A528-19FC3519FF93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsanKaynaklari.Business", "InsanKaynaklari.Business\InsanKaynaklari.Business.csproj", "{7B25D72C-28E5-494B-81FE-D695709AD088}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsanKaynaklari.Business", "InsanKaynaklari.Business\InsanKaynaklari.Business.csproj", "{7B25D72C-28E5-494B-81FE-D695709AD088}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsanKaynaklari.API", "InsanKaynaklari.API\InsanKaynaklari.API.csproj", "{D67B1F68-EBA6-4CB3-BC1B-B180024CF45C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7B25D72C-28E5-494B-81FE-D695709AD088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B25D72C-28E5-494B-81FE-D695709AD088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B25D72C-28E5-494B-81FE-D695709AD088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D67B1F68-EBA6-4CB3-BC1B-B180024CF45C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67B1F68-EBA6-4CB3-BC1B-B180024CF45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67B1F68-EBA6-4CB3-BC1B-B180024CF45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67B1F68-EBA6-4CB3-BC1B-B180024CF45C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
