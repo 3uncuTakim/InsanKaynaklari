@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InsanKaynaklari.Business.Manager.Abstract;
+using InsanKaynaklari.Entities.Concrete;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +9,14 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.API.Controllers
 {
-    public class AdvancePaymentController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AdvancePaymentController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IGeneralService<AdvancePayment> _advancePaymentService;
+        public AdvancePaymentController(IGeneralService<AdvancePayment> advancePaymentService)
         {
-            return View();
+            _advancePaymentService = advancePaymentService;
         }
     }
 }
