@@ -1,6 +1,5 @@
-﻿using InsanKaynaklari.DataAccess.Abstract;
-using InsanKaynaklari.DataAccess.Context;
-using InsanKaynaklari.DataAccess.IRepository;
+﻿using InsanKaynaklari.DataAccess.Context;
+using InsanKaynaklari.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace InsanKaynaklari.DataAccess.Repository.BaseRepository
     public class BaseRepository<T>:IGenericRepository<T> where T:class, new()
     {
         private readonly DatabaseContext _context;
-public BaseRepository(DatabaseContext context)
+        public BaseRepository(DatabaseContext context)
         {
             _context = context;
         }
