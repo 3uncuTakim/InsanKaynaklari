@@ -9,7 +9,8 @@ namespace InsanKaynaklari.DataAccess.Repository.IRepository
 {
     public interface IGenericRepository<T>where T:class
     {
-        Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate);
+        Task<IList<T>> GetByFilter(Expression<Func<T, bool>> predicate);
+        Task<T> GetAllAsync();
         Task<T> GetById(int id);
         Task Add(T entity);
         Task Update(int id, T entity);
