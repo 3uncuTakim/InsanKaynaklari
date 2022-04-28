@@ -41,5 +41,35 @@ namespace InsanKaynaklari.UI.Controllers
             
             return View(profile);
         }
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult ChangePassword(string id)
+        {
+            var personelPassword = _context.Personels.Where(x => x.ID == Convert.ToInt32(id)).Select(x => new ChangePasswordVM
+            {
+                ID = x.ID,
+                Password = x.Password
+            }).FirstOrDefault();
+            return View(personelPassword);
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordVM change)
+        {
+            if (ModelState.IsValid)
+            {
+                if (change.Password == change.PasswordControl)
+                {
+                    var oldPassword = _context.Personels.FirstOrDefault(x => x.ID.ToString().Equals(HttpContext.Session.GetString("userId")));
+                    oldPassword.Password = change.Password;
+                    _context.SaveChanges();
+                    return RedirectToAction("Profile", "Settings", new { Id = HttpContext.Session.GetString("userId") });
+                }
+                else
+                {
+                    return View(change);
+                }
+                
+            }
+            return View();
+        }
     }
 }

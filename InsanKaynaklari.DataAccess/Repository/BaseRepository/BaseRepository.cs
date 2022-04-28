@@ -41,6 +41,16 @@ namespace InsanKaynaklari.DataAccess.Repository.BaseRepository
             return await query.ToListAsync();
         }
 
+        public Task<T> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<T>> GetByFilter(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<T> GetById(int id)
         {
             return await _context.Set<T>().FindAsync(id);
