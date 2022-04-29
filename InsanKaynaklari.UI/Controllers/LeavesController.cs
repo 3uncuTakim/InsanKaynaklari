@@ -18,10 +18,12 @@ namespace InsanKaynaklari.UI.Controllers
             _context = context;
         }
 
-        
-        public IActionResult Index()
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult Index(string id)
         {
-            return View(_context.Leaves.ToList());
+            var personelLeave = _context.Leaves.Where(x => x.PersonelID == Convert.ToInt32(id)).ToList();
+            return View(personelLeave);
         }
+
     }
 }
