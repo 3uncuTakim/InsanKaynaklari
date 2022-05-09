@@ -30,7 +30,7 @@ namespace InsanKaynaklari.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=kolayikdb.database.windows.net; Database=HumanResources; User Id=Takim3ik; Password=Ad19955991;");
+            optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016; Database=HumanResources; User Id=takim3ik_; Password=Ad19955991;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
