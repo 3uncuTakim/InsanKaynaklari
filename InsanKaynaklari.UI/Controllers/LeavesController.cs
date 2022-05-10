@@ -1,4 +1,5 @@
 ﻿using InsanKaynaklari.DataAccess.Context;
+using InsanKaynaklari.Entities.Concrete;
 using InsanKaynaklari.UI.Filters;
 using InsanKaynaklari.UI.ViewModels.Leaves;
 using Microsoft.AspNetCore.Mvc;
@@ -29,10 +30,22 @@ namespace InsanKaynaklari.UI.Controllers
             };
             return View(lmp);
         }
-        public IActionResult Create()
+        public IActionResult Create(string yonlen)
         {
+            ViewBag.yonlen = yonlen;
             return View();
         }
-
+        [HttpPost]
+        public IActionResult Create(LeaveCreateVM model,string yonlen) 
+        { 
+            var leave = new Leave
+            {
+                Description=model.Description,
+                ConfirmStatus=Entities.Enums.ConfirmStatus.OnHold,
+                LeaveTypeID=model.LeaveTypeID,
+                StartLeaveDate=model.StartLeaveDate,
+                EndLeaveDate=model.EndLeaveDate,
+            }
+        }
     }
 }
