@@ -23,6 +23,8 @@ namespace InsanKaynaklari.UI.Controllers
         {
             return View();
         }
+
+        //Güzel bir Takım
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult GetAllEvent(string id)
         {
