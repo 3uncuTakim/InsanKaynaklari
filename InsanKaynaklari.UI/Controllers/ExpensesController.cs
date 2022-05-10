@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InsanKaynaklari.DataAccess.Context;
 using InsanKaynaklari.Entities.Concrete;
 using InsanKaynaklari.UI.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace InsanKaynaklari.UI.Controllers
 {
@@ -52,8 +53,7 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult Create(string Id)
         {
-            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes, "ID", "ExpenseTypeName");
-            ViewData["PersonelID"] = new SelectList(_context.Personels, "ID", "Email");
+            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes.OrderByDescending(x=>x.ExpenseTypeName), "ID", "ExpenseTypeName");          
             return View();
         }
 
@@ -63,16 +63,17 @@ namespace InsanKaynaklari.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CheckDocument,Amount,Explanation,ConfirmStatus,ExpenseTypeID,PersonelID,ID")] Expense expense)
+        public async Task<IActionResult> Create([Bind("CheckDocument,Amount,Explanation,ExpenseTypeID")] Expense expense)
         {
             if (ModelState.IsValid)
-            {
+            {               
+                expense.ConfirmStatus = Entities.Enums.ConfirmStatus.OnHold;
+                expense.PersonelID = Convert.ToInt32(HttpContext.Session.GetString("userId"));
                 _context.Add(expense);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes, "ID", "ExpenseTypeName", expense.ExpenseTypeID);
-            ViewData["PersonelID"] = new SelectList(_context.Personels, "ID", "Email", expense.PersonelID);
             return View(expense);
         }
 

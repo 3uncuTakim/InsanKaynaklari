@@ -6,6 +6,7 @@ using InsanKaynaklari.UI.ViewModels.Leaves;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,8 @@ namespace InsanKaynaklari.UI.Controllers
         }
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult Create(string id)
-        {         
+        {
+            ViewData["LeaveTypeID"] = new SelectList(_context.LeaveTypes.OrderByDescending(x => x.TypeName), "ID", "TypeName");
             return View();
         }
         [HttpPost]

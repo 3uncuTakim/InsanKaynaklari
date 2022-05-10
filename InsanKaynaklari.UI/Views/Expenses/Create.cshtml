@@ -28,19 +28,12 @@
                 <input asp-for="Explanation" class="form-control" />
                 <span asp-validation-for="Explanation" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmStatus" class="control-label"></label>
-                <select asp-for="ConfirmStatus" class="form-control"></select>
-                <span asp-validation-for="ConfirmStatus" class="text-danger"></span>
-            </div>
+   
             <div class="form-group">
                 <label asp-for="ExpenseTypeID" class="control-label"></label>
                 <select asp-for="ExpenseTypeID" class ="form-control" asp-items="ViewBag.ExpenseTypeID"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="PersonelID" class="control-label"></label>
-                <select asp-for="PersonelID" class ="form-control" asp-items="ViewBag.PersonelID"></select>
-            </div>
+     
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
