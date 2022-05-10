@@ -1,4 +1,4 @@
-﻿@model LeaveMainPageVM
+﻿@model List<LeaveMainPageVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,6 +20,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">izinleriniz</h6>
+            <a class="btn btn-info " href="~/Leaves/Create/@Context.Session.GetString("userId")">İzin</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -35,10 +36,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Leaves)
+                        @foreach (var item in Model)
                         {
                             <tr>
-                                <th>@item.LeaveType.TypeName</th>
+                                <th>@item.LeaveTypeName</th>
                                 <th>@item.StartLeaveDate</th>
                                 <th>@item.EndLeaveDate</th>
                                 <th>@item.TotalDaysOff</th>

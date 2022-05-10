@@ -93,6 +93,8 @@
     <script src="~/js/jquery.dataTables.min.js"></script>
     <script src="~/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/js/datatables-demo.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 
 
 </body>

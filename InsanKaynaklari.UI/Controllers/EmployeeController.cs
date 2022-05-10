@@ -40,7 +40,7 @@ namespace InsanKaynaklari.UI.Controllers
                                select dt).Take(5).ToList();
             var personelLeaves = (from l in _context.Leaves
                                   join lt in _context.LeaveTypes on l.LeaveTypeID equals lt.ID
-                                  where l.PersonelID == Convert.ToInt32(id) && (l.StartLeaveDate  > now && l.StartLeaveDate < now.AddMonths(1))
+                                  where l.PersonelID == Convert.ToInt32(id) && (l.StartLeaveDate  > now && l.StartLeaveDate < now.AddMonths(1) && l.ConfirmStatus==Entities.Enums.ConfirmStatus.Accepted)
                                   select new Leavelist { LeaveTypeName = lt.TypeName, LeaveDuration = l.TotalDaysOff, LeaveStartDate = l.StartLeaveDate }).ToList();
             EmployeeMainPageVM emp = new EmployeeMainPageVM
             {

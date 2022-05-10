@@ -1,7 +1,9 @@
 ﻿using InsanKaynaklari.DataAccess.Context;
 using InsanKaynaklari.Entities.Concrete;
 using InsanKaynaklari.UI.Filters;
+using InsanKaynaklari.UI.Managers;
 using InsanKaynaklari.UI.ViewModels.Leaves;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,25 +17,36 @@ namespace InsanKaynaklari.UI.Controllers
     public class LeavesController : Controller
     {
         private readonly DatabaseContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public LeavesController(DatabaseContext context)
+        public LeavesController(DatabaseContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult Index(string id)
         {
-            var personelLeave = _context.Leaves.Where(x => x.PersonelID == Convert.ToInt32(id)).ToList();
-            LeaveMainPageVM lmp = new LeaveMainPageVM
-            {
-                Leaves = personelLeave
-            };
+            var lmp = (from lt in _context.LeaveTypes
+                       join l in _context.Leaves on lt.ID equals l.LeaveTypeID
+                       where l.PersonelID == Convert.ToInt32(id)
+                       select new LeaveMainPageVM
+                       {
+                           Description = l.Description,
+                           LeaveTypeName = lt.TypeName,
+                           TotalDaysOff = l.TotalDaysOff,
+                           StartLeaveDate = l.StartLeaveDate,
+                           EndLeaveDate = l.EndLeaveDate,
+                           ConfirmStatus=l.ConfirmStatus
+                           
+                       }).ToList();
+
             return View(lmp);
         }
-        public IActionResult Create(string yonlen)
-        {
-            ViewBag.yonlen = yonlen;
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult Create(string id)
+        {         
             return View();
         }
         [HttpPost]
@@ -43,6 +56,7 @@ namespace InsanKaynaklari.UI.Controllers
             {
                 var leave = new Leave
                 {
+                    LeaveDocument = model.LeaveDocument.GetUniqueNameAndSavePhotoToDisk(_webHostEnvironment),
                     Description = model.Description,
                     ConfirmStatus = Entities.Enums.ConfirmStatus.OnHold,
                     LeaveTypeID = model.LeaveTypeID,
@@ -53,7 +67,7 @@ namespace InsanKaynaklari.UI.Controllers
                 };
                 _context.Leaves.Add(leave);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Leaves", new { Username = HttpContext.Session.GetString("userId") });
+                return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
             }
             else
             {
