@@ -2,6 +2,7 @@
 using InsanKaynaklari.Entities.Concrete;
 using InsanKaynaklari.UI.Filters;
 using InsanKaynaklari.UI.ViewModels.Leaves;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -37,14 +38,26 @@ namespace InsanKaynaklari.UI.Controllers
         }
         [HttpPost]
         public IActionResult Create(LeaveCreateVM model,string yonlen) 
-        { 
-            var leave = new Leave
+        {
+            if (ModelState.IsValid)
             {
-                Description=model.Description,
-                ConfirmStatus=Entities.Enums.ConfirmStatus.OnHold,
-                LeaveTypeID=model.LeaveTypeID,
-                StartLeaveDate=model.StartLeaveDate,
-                EndLeaveDate=model.EndLeaveDate,
+                var leave = new Leave
+                {
+                    Description = model.Description,
+                    ConfirmStatus = Entities.Enums.ConfirmStatus.OnHold,
+                    LeaveTypeID = model.LeaveTypeID,
+                    StartLeaveDate = model.StartLeaveDate,
+                    EndLeaveDate = model.EndLeaveDate,
+                    PersonelID = int.Parse(HttpContext.Session.GetString("userId")),
+                    TotalDaysOff = Convert.ToInt32(GetBusinessDay.GetBusinessDays(model.StartLeaveDate, model.EndLeaveDate))
+                };
+                _context.Leaves.Add(leave);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Leaves", new { Username = HttpContext.Session.GetString("userId") });
+            }
+            else
+            {
+                return View(model);
             }
         }
     }

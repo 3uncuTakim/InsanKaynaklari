@@ -9,7 +9,6 @@ namespace InsanKaynaklari.UI.ViewModels.Leaves
     public class LeaveCreateVM
     {
         public string LeaveDocument { get; set; }
-        public int TotalDaysOff { get; set; }
         public DateTime StartLeaveDate { get; set; }
         public DateTime EndLeaveDate { get; set; }
         public string Description { get; set; }
