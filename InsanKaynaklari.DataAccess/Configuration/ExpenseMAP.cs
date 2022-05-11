@@ -19,6 +19,7 @@ namespace InsanKaynaklari.DataAccess.Configuration
             builder.Property(x => x.ConfirmStatus).IsRequired();
             builder.Property(x => x.ExpenseTypeID).IsRequired();
             builder.Property(x => x.PersonelID).IsRequired();
+            builder.Property(x=> x.DateOfExpense).IsRequired().HasDefaultValueSql("getdate()");
         }
     }
 }
