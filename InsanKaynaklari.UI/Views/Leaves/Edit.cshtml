@@ -41,15 +41,15 @@
             <div class="form-group">
                 <label asp-for="LeaveDocument" class="control-label"></label>
                 <div class="custom-file">
-                    <input asp-for="LeaveDocument" class="custom-file-input" id="customFile" />
-                    <label class="custom-file-label" for="customFile">Choose File</label>
+                    <input type="submit" value="Güncelle" class="btn btn-info" />
+                    <a href="~/Leaves/Index/@Context.Session.GetString("userId")" class="btn btn-primary"><i class="fas fa-fast-backward"> Geri Dön</i></a>
                 </div>
-                <span asp-validation-for="LeaveDocument" class="text-danger"></span>
+                <input asp-for="LeaveDocument" class="custom-file-input" id="customFile" />
+                <label class="custom-file-label" for="customFile">Choose File</label>
             </div>
-            <div class="form-group float-right mt-4">
-                <input type="submit" value="Güncelle" class="btn btn-info" />
-                <a href="~/Leaves/Index/@Context.Session.GetString("userId")" class="btn btn-primary"><i class="fas fa-fast-backward"> Geri Dön</i></a>
-            </div>
+            <span asp-validation-for="LeaveDocument" class="text-danger"></span>
+        </div>
+        <div class="form-group float-right mt-4">
         </div>
     </div>
 </form>
