@@ -13,6 +13,8 @@ namespace InsanKaynaklari.Entities.Concrete
         public string CheckDocument  { get; set; }        
         public int Amount { get; set; }
         public string Explanation { get; set; }
+
+        public DateTime DateOfExpense { get; set; }
         public ConfirmStatus ConfirmStatus { get; set; }
 
         //Relational  Properties Begin

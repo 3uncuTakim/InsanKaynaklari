@@ -5,62 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
 <p>
     <a href="~/Expenses/Create/@Context.Session.GetString("userId")">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckDocument)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Explanation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConfirmStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpenseType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Personel)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckDocument)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Explanation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConfirmStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpenseType.ExpenseTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Personel.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">
+        DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+                                                                   href="https://datatables.net">official DataTables documentation</a>.
+    </p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Harcama Ekle</h6>
+            <a class="btn btn-info " href="~/Expenses/Create/@Context.Session.GetString("userId")">Harcama</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Açıklama</th>
+                            <th>Harcama Türü</th>
+                            <th>Tutar</th>
+                            <th>Fiş Tarihi</th>
+                            <th>Onay Durumu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.Explanation</th>
+                                <th>@item.ExpenseType</th>
+                                <th>@item.Amount</th>
+                                <th>@item.DateOfExpense</th>
+                                <th>@item.ConfirmStatus</th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
