@@ -9,6 +9,7 @@ namespace InsanKaynaklari.UI.ViewModels.Leaves
 {
     public class LeaveMainPageVM
     {
+        public int ID { get; set; }
         public int TotalDaysOff { get; set; }
         public DateTime StartLeaveDate { get; set; }
         public DateTime EndLeaveDate { get; set; }

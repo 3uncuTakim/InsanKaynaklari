@@ -53,7 +53,7 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult Create(string Id)
         {
-            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes.OrderByDescending(x=>x.ExpenseTypeName), "ID", "ExpenseTypeName");          
+            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes.OrderBy(x=>x.ExpenseTypeName), "ID", "ExpenseTypeName");          
             return View();
         }
 

@@ -34,6 +34,7 @@ namespace InsanKaynaklari.UI.Controllers
                        where l.PersonelID == Convert.ToInt32(id)
                        select new LeaveMainPageVM
                        {
+                           ID=l.ID,
                            Description = l.Description,
                            LeaveTypeName = lt.TypeName,
                            TotalDaysOff = l.TotalDaysOff,
@@ -48,7 +49,7 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult Create(string id)
         {
-            ViewData["LeaveTypeID"] = new SelectList(_context.LeaveTypes.OrderByDescending(x => x.TypeName), "ID", "TypeName");
+            ViewData["LeaveTypeID"] = new SelectList(_context.LeaveTypes.OrderBy(x => x.TypeName), "ID", "TypeName");
             return View();
         }
         [HttpPost]
@@ -75,6 +76,55 @@ namespace InsanKaynaklari.UI.Controllers
             {
                 return View(model);
             }
+        }
+        public IActionResult Edit(int id)
+        {
+            ViewData["LeaveTypeID"] = new SelectList(_context.LeaveTypes.OrderBy(x => x.TypeName), "ID", "TypeName");
+            var editLeave = _context.Leaves.Find(id);
+            if (editLeave is not null)
+            {
+                LeaveEditVM editVM = new()
+                {
+                    ID = editLeave.ID,
+                    Description = editLeave.Description,
+                    StartLeaveDate = editLeave.StartLeaveDate,
+                    EndLeaveDate = editLeave.EndLeaveDate,
+                    LeaveDocumentName=editLeave.LeaveDocument,
+                    LeaveTypeID=editLeave.LeaveTypeID
+                };
+                return View(editVM);
+            }
+            else
+            {
+                TempData["error"] = "İzin bulunamadı";
+                return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
+            }
+            
+        }
+        [HttpPost]
+        public IActionResult Edit(LeaveEditVM leave)
+        {
+            var newLeave = _context.Leaves.FirstOrDefault(x => x.ID.Equals(leave.ID));
+            if (newLeave is null)
+            {
+                ViewData["error"] = "Edit fail";
+                ViewData["LeaveTypeID"] = new SelectList(_context.LeaveTypes.OrderBy(x => x.TypeName), "ID", "TypeName");
+                return View(leave);
+            }
+            newLeave.LeaveTypeID = leave.LeaveTypeID;
+            newLeave.Description = leave.Description;
+            newLeave.StartLeaveDate = leave.StartLeaveDate;
+            newLeave.EndLeaveDate = leave.EndLeaveDate;
+            newLeave.TotalDaysOff = Convert.ToInt32(GetBusinessDay.GetBusinessDays(leave.StartLeaveDate, leave.EndLeaveDate));
+            if (leave.LeaveDocument is not null)
+            {
+                newLeave.LeaveDocument = leave.LeaveDocument.GetUniqueNameAndSavePhotoToDisk(_webHostEnvironment);
+                FileManager.RemoveImageFromDisk(leave.LeaveDocumentName, _webHostEnvironment);
+            }
+            _context.SaveChanges();
+            TempData["message"] = "İzin Güncellendi";
+            return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
+
         }
     }
 }

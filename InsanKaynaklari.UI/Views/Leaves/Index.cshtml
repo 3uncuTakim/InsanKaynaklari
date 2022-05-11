@@ -8,13 +8,14 @@
 <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <div class="container-fluid">
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">
-        DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-                                                                   href="https://datatables.net">official DataTables documentation</a>.
-    </p>
+    @if (TempData["message"] != null)
+    {
+        <div class="text-success">@TempData["message"]</div>
+    }
+    @if (TempData["error"] != null)
+    {
+        <div class="text-danger">@TempData["error"]</div>
+    }
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -32,6 +33,7 @@
                             <th>Bitiş Tarihi</th>
                             <th>Gün Sayısı</th>
                             <th>Onay Durumu</th>
+                            <th> ---------  </th>
 
                         </tr>
                     </thead>
@@ -44,7 +46,17 @@
                                 <th>@item.EndLeaveDate.ToString("dd/MMMM")</th>
                                 <th>@item.TotalDaysOff</th>
                                 <th>@item.ConfirmStatus</th>
-                            </tr>                        
+                                @if (item.StartLeaveDate >= DateTime.Today.AddDays(7))
+                                {
+                                    <th><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a> </th>
+                                }
+                                else
+                                {
+                                    <th>--</th>
+                                }
+
+                            </tr>
+
                         }
                     </tbody>
                 </table>

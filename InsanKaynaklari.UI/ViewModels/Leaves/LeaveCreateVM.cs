@@ -14,6 +14,5 @@ namespace InsanKaynaklari.UI.ViewModels.Leaves
         public DateTime EndLeaveDate { get; set; }
         public string Description { get; set; }
         public int LeaveTypeID { get; set; }
-        public string leaveTypeName { get; set; }
     }
 }
