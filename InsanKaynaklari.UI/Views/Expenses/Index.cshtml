@@ -5,31 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
-    <a href="~/Expenses/Create/@Context.Session.GetString("userId")">Create New</a>
-</p>
 <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">
-        DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-                                                                   href="https://datatables.net">official DataTables documentation</a>.
-    </p>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Harcama Ekle</h6>
-            <a class="btn btn-info " href="~/Expenses/Create/@Context.Session.GetString("userId")">Harcama</a>
+            
+            <a class="btn btn-info " href="~/Expenses/Create/@Context.Session.GetString("userId")">Harcama Ekle</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Açıklama</th>
                             <th>Harcama Türü</th>
                             <th>Tutar</th>
@@ -55,3 +42,15 @@
     </div>
 
 </div>
+
+@section Scripts{
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#myTable').DataTable({
+         "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+    }
+    });
+    });
+</script>
+}
