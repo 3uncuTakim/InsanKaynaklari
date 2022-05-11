@@ -128,7 +128,7 @@ namespace InsanKaynaklari.UI.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var deleted = _context.Leaves.Find(id);
+            var deleted = _context.Leaves.FirstOrDefault(x => x.ID == id);
             if (deleted.ConfirmStatus==Entities.Enums.ConfirmStatus.OnHold)
             {
                 _context.Leaves.Remove(deleted);

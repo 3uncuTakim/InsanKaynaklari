@@ -17,7 +17,7 @@
         <div class="text-danger">@TempData["error"]</div>
     }
 
-    <!-- DataTales Example -->
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">izinleriniz</h6>
@@ -28,6 +28,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>İzin Türü</th>
                             <th>Başlangıç Tarihi</th>
                             <th>Bitiş Tarihi</th>
@@ -41,51 +42,50 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <th>@item.LeaveTypeName</th>
-                            <th>@item.StartLeaveDate.ToString("dd/MMMM")</th>
-                            <th>@item.EndLeaveDate.ToString("dd/MMMM")</th>
-                            <th>@item.TotalDaysOff</th>
-                            <th>@item.ConfirmStatus</th>
-                            @if (item.StartLeaveDate >= DateTime.Today.AddDays(7)&& item.ConfirmStatus==ConfirmStatus.OnHold)
-                            {
-                                <th><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a></th>
-                            }
-                            else
-                            {
-                                <th>--</th>
-                            }
+                            <tr>
+                                <th>@item.ID</th>
+                                <th>@item.LeaveTypeName</th>
+                                <th>@item.StartLeaveDate.ToString("dd/MMMM")</th>
+                                <th>@item.EndLeaveDate.ToString("dd/MMMM")</th>
+                                <th>@item.TotalDaysOff</th>
+                                <th>@item.ConfirmStatus</th>
+                                @if (item.StartLeaveDate >= DateTime.Today.AddDays(7) && item.ConfirmStatus == ConfirmStatus.OnHold)
+                                {
+                                    <th><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a></th>
+                                }
+                                else
+                                {
+                                    <th>--</th>
+                                }
 
-                            @if ((item.ConfirmStatus == ConfirmStatus.OnHold || item.ConfirmStatus == ConfirmStatus.Accepted) && item.StartLeaveDate > DateTime.Today)
-                            {
-                                <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">İptal Et</button></th>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">İptal Etme İşlemi</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Onaylanmış izinler sadece insan kaynakları tarafından iptal edilebilir.
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">İptal Et</a>
+                                @if ((item.ConfirmStatus == ConfirmStatus.OnHold || item.ConfirmStatus == ConfirmStatus.Accepted) && item.StartLeaveDate > DateTime.Today)
+                                {
+                                    <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal@(item.ID)">İptal Et</button></th>
+                                    <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">İptal Etme İşlemi</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Onaylanmış izinler sadece insan kaynakları tarafından iptal edilebilir. id= @item.ID
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">İptal Et</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
-                            else
-                            {
-                                <th>--</th>
-                            }
-
-                        </tr>
-
+                                }
+                                else
+                                {
+                                    <th>--</th>
+                                }
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -95,4 +95,4 @@
 
 </div>
 
-<!-- Modal -->
+
