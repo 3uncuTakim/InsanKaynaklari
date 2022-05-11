@@ -126,5 +126,22 @@ namespace InsanKaynaklari.UI.Controllers
             return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
 
         }
+        public IActionResult Delete(int id)
+        {
+            var deleted = _context.Leaves.Find(id);
+            if (deleted.ConfirmStatus==Entities.Enums.ConfirmStatus.OnHold)
+            {
+                _context.Leaves.Remove(deleted);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
+            }
+            else 
+            {
+                //yöneticye email yollayacak izin iptali için (her işlem icin bir kere)
+                TempData["message"] = "Talebiniz alınmıştır";
+                return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
+            }
+            
+        }
     }
 }
