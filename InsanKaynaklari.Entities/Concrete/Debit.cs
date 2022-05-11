@@ -15,6 +15,7 @@ namespace InsanKaynaklari.Entities.Concrete
         public DateTime DateOfIssue { get; set; }
         public DateTime? DateOfReturn { get; set; }
         public string Description { get; set; }
+        public bool IsCorfirmed { get; set; }
 
         //Relational  Properties Begin
 

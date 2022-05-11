@@ -34,6 +34,7 @@
                             <th>Gün Sayısı</th>
                             <th>Onay Durumu</th>
                             <th> ---------  </th>
+                            <th> ---------  </th>
 
                         </tr>
                     </thead>
@@ -46,7 +47,7 @@
                             <th>@item.EndLeaveDate.ToString("dd/MMMM")</th>
                             <th>@item.TotalDaysOff</th>
                             <th>@item.ConfirmStatus</th>
-                            @if (item.StartLeaveDate >= DateTime.Today.AddDays(7))
+                            @if (item.StartLeaveDate >= DateTime.Today.AddDays(7)&& item.ConfirmStatus==ConfirmStatus.OnHold)
                             {
                                 <th><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a></th>
                             }
