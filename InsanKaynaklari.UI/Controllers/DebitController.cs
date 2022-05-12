@@ -30,7 +30,8 @@ namespace InsanKaynaklari.UI.Controllers
                              DebitCode=deb.DebitCode,
                              DateOfIssue=deb.DateOfIssue,
                              Description=deb.Description,
-                             DateOfReturn=deb.DateOfReturn
+                             DateOfReturn=deb.DateOfReturn,
+                             IsCorfirmed=deb.IsCorfirmed
                          }
                          ).ToList();
            

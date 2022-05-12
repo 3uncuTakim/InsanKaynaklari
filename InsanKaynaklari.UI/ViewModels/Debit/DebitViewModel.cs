@@ -14,6 +14,8 @@ namespace InsanKaynaklari.UI.ViewModels.Debit
         public DateTime? DateOfReturn { get; set; }
         [Required]
         public string Description { get; set; }
-        
+        [Required]
+        public bool IsCorfirmed { get; set; }
+
     }
 }
