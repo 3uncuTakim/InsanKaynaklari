@@ -77,6 +77,23 @@ namespace InsanKaynaklari.UI.Controllers
                 return View(model);
             }
         }
+        public IActionResult Details(int id)
+        {
+            var leave = (from lt in _context.LeaveTypes
+                         join l in _context.Leaves on lt.ID equals l.LeaveTypeID
+                         where l.ID == id
+                         select new LeaveDetailsVM
+                         {
+                             Description = l.Description,
+                             StartLeaveDate = l.StartLeaveDate,
+                             EndLeaveDate = l.EndLeaveDate,
+                             LeaveTypeName = lt.TypeName,
+                             ConfirmStatus = l.ConfirmStatus,
+                             LeaveDocument = l.LeaveDocument,
+                             TotalDaysOff = l.TotalDaysOff
+                         }).FirstOrDefault();
+            return View(leave);
+        }
         public IActionResult Edit(int id)
         {
             ViewData["LeaveTypeID"] = new SelectList(_context.LeaveTypes.OrderBy(x => x.TypeName), "ID", "TypeName");

@@ -28,7 +28,7 @@
                 <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>Ayrıntılar</th>
                             <th>İzin Türü</th>
                             <th>Başlangıç Tarihi</th>
                             <th>Bitiş Tarihi</th>
@@ -43,7 +43,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <th>@item.ID</th>
+                                <th><a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.ID">Detay</a></th>
                                 <th>@item.LeaveTypeName</th>
                                 <th>@item.StartLeaveDate.ToString("dd/MMMM")</th>
                                 <th>@item.EndLeaveDate.ToString("dd/MMMM")</th>
