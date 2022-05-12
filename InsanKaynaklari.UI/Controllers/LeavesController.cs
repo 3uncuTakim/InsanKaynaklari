@@ -53,7 +53,7 @@ namespace InsanKaynaklari.UI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(LeaveCreateVM model,string yonlen) 
+        public IActionResult Create(LeaveCreateVM model) 
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +155,7 @@ namespace InsanKaynaklari.UI.Controllers
             else 
             {
                 //yöneticye email yollayacak izin iptali için (her işlem icin bir kere)
-                TempData["message"] = "Talebiniz alınmıştır";
+                TempData["message"] = $"{deleted.StartLeaveDate.ToString("dd MMMM")}tarihinde başlayan {deleted.ID} nolu iznin iptal talebi iletilmiştir.";
                 return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
             }
             
