@@ -9,6 +9,7 @@ using InsanKaynaklari.DataAccess.Context;
 using InsanKaynaklari.Entities.Concrete;
 using InsanKaynaklari.UI.Filters;
 using Microsoft.AspNetCore.Http;
+using InsanKaynaklari.UI.ViewModels.Expenses;
 
 namespace InsanKaynaklari.UI.Controllers
 {
@@ -25,8 +26,12 @@ namespace InsanKaynaklari.UI.Controllers
         // GET: Expenses
         public async Task<IActionResult> Index()
         {
+            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes.OrderBy(x => x.ExpenseTypeName), "ID", "ExpenseTypeName");
             var databaseContext = _context.Expenses.Include(e => e.ExpenseType).Include(e => e.Personel);
-            return View(await databaseContext.ToListAsync());
+            var vm = new IndexViewModel() { 
+            Expenses = await databaseContext.ToListAsync()
+            };
+            return View(vm);
         }
 
         // GET: Expenses/Details/5
@@ -167,5 +172,6 @@ namespace InsanKaynaklari.UI.Controllers
         {
             return _context.Expenses.Any(e => e.ID == id);
         }
+       
     }
 }

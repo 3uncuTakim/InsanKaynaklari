@@ -1,17 +1,21 @@
-﻿@model IEnumerable<InsanKaynaklari.Entities.Concrete.Expense>
+﻿@model IndexViewModel
+
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             
-            <a class="btn btn-info " href="~/Expenses/Create/@Context.Session.GetString("userId")">Harcama Ekle</a>
+            <!--<a class="btn btn-info " href="~/Expenses/Create/@Context.Session.GetString("userId")">Harcama Ekle</a>-->
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -26,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Expenses)
                         {
                             <tr>
                                 <th>@item.Explanation</th>
@@ -43,6 +47,62 @@
     </div>
 
 </div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"
+        data-url="@Url.Action("Create")">
+    Harcama Ekle
+</button>
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Harcama Ekleme Ekranı</h2>
+            </div>
+            <form asp-controller="Expenses" asp-action="Create" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen">
+                <div class="modal-body">
+                    <label>
+                        Fatura 
+                    </label>
+                    <input type="text" name="CheckDocument" class="form-control"/>
+                    <br />
+                    <label>
+                        Harcama Türü
+                    </label>
+                    <input type="text" name="ExpenseType" class="form-control" />
+                    <br />
+                    <label>
+                        Tutar
+                    </label>
+                    <input type="text" name="Amount" class="form-control" />
+                    <br />
+                    <label>
+                        Açıklama
+                    </label>
+                    <textarea asp-for="@Model.Expense.Explanation" class="form-control" style="width:100%; height:150px;"></textarea>
+                    <br />
+                    <label>
+                        Harcama Tarihi
+                    </label>
+                    <input type="date" name="DateOfExpense" class="form-control" />
+                    <br />
+                    <button class= "btn btn-info">Kaydet</button>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 @section Scripts{
 <script type="text/javascript">
