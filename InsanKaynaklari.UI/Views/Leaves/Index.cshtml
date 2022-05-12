@@ -7,23 +7,23 @@
 }
 <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <div class="container-fluid">
-
-    @if (TempData["message"] != null)
-    {
-        <div class="text-success">@TempData["message"]</div>
-    }
-    @if (TempData["error"] != null)
-    {
-        <div class="text-danger">@TempData["error"]</div>
-    }
-
-
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">izinleriniz</h6>
-            <a class="btn btn-info " href="~/Leaves/Create/@Context.Session.GetString("userId")">İzin</a>
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="m-0 p-2 font-weight-bold text-primary">İzinleriniz</h5>
+            <a class="btn btn-info " href="~/Leaves/Create/@Context.Session.GetString("userId")">İzin Ekle</a>
         </div>
         <div class="card-body">
+           
+            <div class="d-flex justify-content-around">
+                @if (TempData["message"] != null)
+                {
+                    <div class="text-success">@TempData["message"]</div>
+                }
+                @if (TempData["error"] != null)
+                {
+                    <div class="text-danger">@TempData["error"]</div>
+                }
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                     <thead>
