@@ -1,4 +1,5 @@
-﻿using InsanKaynaklari.DataAccess.Context;
+﻿using InsanKaynaklari.Business.Mailing;
+using InsanKaynaklari.DataAccess.Context;
 using InsanKaynaklari.UI.Filters;
 using InsanKaynaklari.UI.ViewModels.Debit;
 using Microsoft.AspNetCore.Http;
@@ -14,10 +15,12 @@ namespace InsanKaynaklari.UI.Controllers
     public class DebitController : Controller
     {
         private readonly DatabaseContext _context;
+        private readonly IMailService _mailService;
 
-        public DebitController(DatabaseContext context)
+        public DebitController(DatabaseContext context, IMailService mailService)
         {
             _context = context;
+            _mailService = mailService;
         }
 
         [HttpGet("[controller]/[action]/{Id}")]
@@ -25,7 +28,7 @@ namespace InsanKaynaklari.UI.Controllers
         {
             var debit = (from deb in _context.Debits
                          where deb.PersonelID == Convert.ToInt32(id)
-                         select new DebitViewModel
+                         select new DebitList
                          {
                              DebitName = deb.DebitName,
                              DebitCode = deb.DebitCode,
@@ -37,8 +40,11 @@ namespace InsanKaynaklari.UI.Controllers
                          }
                          ).ToList();
 
-
-            return View(debit);
+            var newDebit = new DebitViewModel
+            {
+                DebitList = debit
+            };
+            return View(newDebit);
             //izinlerdekinin aynısı webgrid kulllanılacak (sb admin-2)
             //Onay butonu olacak (edit işlemi sadece confirm status ü değiştirecek)!sadece bir kere editleyebilecek
             //İtiraz butonu olacak(e-mail (form şeklinde))
@@ -47,11 +53,15 @@ namespace InsanKaynaklari.UI.Controllers
         public IActionResult Cancel(int id)
         {
             var debit = _context.Debits.FirstOrDefault(x => x.ID == id);
+            var sMail = _context.Personels.Where(x => x.ID.Equals(debit.PersonelID)).Select(x => x.Email).ToString();
             if (debit.IsCorfirmed)
             {
                 debit.IsCorfirmed = false;
-                TempData["message"] = "Zimmet onay durumu güncellendi";
-                _context.SaveChanges(); 
+                TempData["message"] = "Zimmet iptal edildi";
+                _context.SaveChanges();
+
+                _mailService.SendEmail(new MailTemplate(sMail, "Zimmet iptali",));
+
                 return RedirectToAction("Index", "Debit", new { Id = HttpContext.Session.GetString("userId") });
             }
             return View();
@@ -61,10 +71,10 @@ namespace InsanKaynaklari.UI.Controllers
         public IActionResult Accept(int id)
         {
             var debit = _context.Debits.FirstOrDefault(x => x.ID == id);
-            if (debit.IsCorfirmed!=true)
+            if (debit.IsCorfirmed != true)
             {
                 debit.IsCorfirmed = true;
-                TempData["message"] = "Zimmet onay durumu güncellendi";
+                TempData["message"] = "Zimmet onaylandı";
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Debit", new { Id = HttpContext.Session.GetString("userId") });
             }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DebitViewModel>
+﻿@model DebitViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.DebitList)
                         {
                             <tr>
                                 <th>@item.DebitName</th>
@@ -62,11 +62,13 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     Zimmeti iptal etmek istiyor musunuz? id= @item.ID
+                                                    
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                                                    <a class="btn btn-danger" asp-action="Cancel" asp-route-id="@item.ID">İptal Et</a>
-                                                </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                                            <a class="btn btn-danger" asp-action="Cancel" asp-route-id="@item.ID">İptal Et</a>
+                                                        </div>
+
                                             </div>
                                         </div>
                                     </div>

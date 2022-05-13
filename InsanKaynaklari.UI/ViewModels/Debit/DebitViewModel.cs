@@ -1,10 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace InsanKaynaklari.UI.ViewModels.Debit
 {
     public class DebitViewModel
     {
+        [Required]
+        public string Cancelation { get; set; }
+        public List<DebitList> DebitList { get; set; }
+
+    }
+    public class DebitList
+    {
+
         [Required]
         public string DebitName { get; set; }
         [Required]
@@ -17,6 +26,5 @@ namespace InsanKaynaklari.UI.ViewModels.Debit
         [Required]
         public bool IsConfirmed { get; set; }
         public int ID { get; set; }
-
     }
 }
