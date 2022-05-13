@@ -1,6 +1,7 @@
 ﻿using InsanKaynaklari.DataAccess.Context;
 using InsanKaynaklari.UI.Filters;
 using InsanKaynaklari.UI.ViewModels.Debit;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,20 +27,48 @@ namespace InsanKaynaklari.UI.Controllers
                          where deb.PersonelID == Convert.ToInt32(id)
                          select new DebitViewModel
                          {
-                             DebitName=deb.DebitName,
-                             DebitCode=deb.DebitCode,
-                             DateOfIssue=deb.DateOfIssue,
-                             Description=deb.Description,
-                             DateOfReturn=deb.DateOfReturn,
-                             IsConfirmed=deb.IsCorfirmed,
+                             DebitName = deb.DebitName,
+                             DebitCode = deb.DebitCode,
+                             DateOfIssue = deb.DateOfIssue,
+                             Description = deb.Description,
+                             DateOfReturn = deb.DateOfReturn,
+                             IsConfirmed = deb.IsCorfirmed,
+                             ID = deb.ID
                          }
                          ).ToList();
-           
-           
+
+
             return View(debit);
             //izinlerdekinin aynısı webgrid kulllanılacak (sb admin-2)
             //Onay butonu olacak (edit işlemi sadece confirm status ü değiştirecek)!sadece bir kere editleyebilecek
             //İtiraz butonu olacak(e-mail (form şeklinde))
+        }
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult Cancel(int id)
+        {
+            var debit = _context.Debits.FirstOrDefault(x => x.ID == id);
+            if (debit.IsCorfirmed)
+            {
+                debit.IsCorfirmed = false;
+                TempData["message"] = "Zimmet onay durumu güncellendi";
+                _context.SaveChanges(); 
+                return RedirectToAction("Index", "Debit", new { Id = HttpContext.Session.GetString("userId") });
+            }
+            return View();
+        }
+
+        [HttpGet("[controller]/[action]/{Id}")]
+        public IActionResult Accept(int id)
+        {
+            var debit = _context.Debits.FirstOrDefault(x => x.ID == id);
+            if (debit.IsCorfirmed!=true)
+            {
+                debit.IsCorfirmed = true;
+                TempData["message"] = "Zimmet onay durumu güncellendi";
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Debit", new { Id = HttpContext.Session.GetString("userId") });
+            }
+            return View();
         }
     }
 }

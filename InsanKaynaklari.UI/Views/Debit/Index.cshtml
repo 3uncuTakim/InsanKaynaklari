@@ -3,60 +3,53 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="m-0 p-2 font-weight-bold text-primary">Zimmetler</h5>
 
-<h1>Index</h1>
+        </div>
+        <div class="card-body">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DebitName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DebitCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfIssue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfReturn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-             <th>
-                @Html.DisplayNameFor(model => model.IsConfirmed)
-            </th>
-           
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model){
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DebitName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DebitCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfIssue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfReturn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsConfirmed)
-            </td>
-            
-            @if (item.IsConfirmed == true )
-                            {
+            <div class="d-flex justify-content-around">
+                @if (TempData["message"] != null)
+                {
+                    <div class="text-success">@TempData["message"]</div>
+                }
+                @if (TempData["error"] != null)
+                {
+                    <div class="text-danger">@TempData["error"]</div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Zimmet İsmi</th>
+                            <th>Zimmet verilme tarihi</th>
+                            <th>Zimmet alınma tarihi</th>
+                            <th>Zimmet kodu</th>
+                            <th>Açıklama</th>
+                            <th>Onay Durumu</th>
+                            <th> ---------  </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.DebitName</th>
+                                <th>@item.DateOfIssue.ToString("dd/MMMM")</th>
+                                <th>@item.DateOfReturn</th>
+                                <th>@item.DebitCode</th>
+                                <th>@item.Description</th>
+                                <th>@item.IsConfirmed</th>
+
+
+                                @if (item.IsConfirmed)
+                                {
                                     <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal@(item.ID)">İptal Et</button></th>
                                     <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -68,11 +61,11 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Zimmeti iptal etmek istiyor musunuz?. id= @item.ID
+                                                    Zimmeti iptal etmek istiyor musunuz? id= @item.ID
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button>
-                                                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Evet</a>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                                    <a class="btn btn-danger" asp-action="Cancel" asp-route-id="@item.ID">İptal Et</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -80,10 +73,46 @@
                                 }
                                 else
                                 {
-                                    <th>--</th>
+                                    <th><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal@(item.ID)">Onayla</button></th>
+                                    <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Onaylama İşlemi</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Zimmeti Onaylamak istiyor musunuz? id= @item.ID
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                                    <a class="btn btn-danger" asp-action="Accept" asp-route-id="@item.ID">Onayla</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
-        </tr>
-            
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#myTable').DataTable({
+         "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+    }
+    });
+    });
+</script>
 }
-    </tbody>
-</table>
+
