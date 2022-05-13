@@ -9,13 +9,15 @@
 
 <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
+
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            
-            <!--<a class="btn btn-info " href="~/Expenses/Create/@Context.Session.GetString("userId")">Harcama Ekle</a>-->
-
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"
+                    data-url="@Url.Action("Create")">
+                Harcama Ekle
+            </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -48,27 +50,26 @@
 
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"
-        data-url="@Url.Action("Create")">
-    Harcama Ekle
-</button>
 <div class="modal" id="Modal1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Harcama Ekleme Ekranı</h2>
+                <h2 class="modal-title">Harcama Ekleme</h2>
             </div>
-            <form asp-controller="Expenses" asp-action="Create" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen">
-                <div class="modal-body">
-                    <label>
-                        Fatura 
-                    </label>
-                    <input type="text" name="CheckDocument" class="form-control"/>
-                    <br />
-                    <label>
-                        Harcama Türü
-                    </label>
-                    <input type="text" name="ExpenseType" class="form-control" />
+            <div class="modal-body">
+                <form asp-controller="Expenses" asp-action="Create" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen">
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Expense.CheckDocument" class="control-label">Fatura Belge</label>
+                        <div class="custom-file">
+                            <input asp-for="@Model.Expense.CheckDocument" class="custom-file-input" id="customFile" />
+                            <label class="custom-file-label" for="customFile">Choose File</label>
+                        </div>
+                        <span asp-validation-for="@Model.Expense.CheckDocument" class="text-danger"></span>
+                    </div>
+                    <label asp-for="@Model.Expense.ExpenseTypeID" class="control-label">Harcama Türü</label>
+                    <select asp-for="@Model.Expense.ExpenseTypeID" class="form-control" asp-items="ViewBag.ExpenseTypeID"></select>
+                    <span asp-validation-for="@Model.Expense.ExpenseTypeID" class="text-danger"></span>
                     <br />
                     <label>
                         Tutar
@@ -85,24 +86,15 @@
                     </label>
                     <input type="date" name="DateOfExpense" class="form-control" />
                     <br />
-                    <button class= "btn btn-info">Kaydet</button>
-                    
-                </div>
-            </form>
+                    <button class="btn btn-info">Kaydet</button>
+
+
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 @section Scripts{
 <script type="text/javascript">
@@ -112,6 +104,12 @@
         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
     }
     });
+    });
+</script>
+<script type="text/javascript">
+    $("custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 </script>
 }
