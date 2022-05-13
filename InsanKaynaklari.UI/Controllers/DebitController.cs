@@ -31,7 +31,7 @@ namespace InsanKaynaklari.UI.Controllers
                              DateOfIssue=deb.DateOfIssue,
                              Description=deb.Description,
                              DateOfReturn=deb.DateOfReturn,
-                             IsCorfirmed=deb.IsCorfirmed
+                             IsConfirmed=deb.IsCorfirmed,
                          }
                          ).ToList();
            

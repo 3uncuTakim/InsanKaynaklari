@@ -15,7 +15,8 @@ namespace InsanKaynaklari.UI.ViewModels.Debit
         [Required]
         public string Description { get; set; }
         [Required]
-        public bool IsCorfirmed { get; set; }
+        public bool IsConfirmed { get; set; }
+        public int ID { get; set; }
 
     }
 }
