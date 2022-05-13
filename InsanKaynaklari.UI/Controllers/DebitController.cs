@@ -50,17 +50,17 @@ namespace InsanKaynaklari.UI.Controllers
             //İtiraz butonu olacak(e-mail (form şeklinde))
         }
         [HttpGet("[controller]/[action]/{Id}")]
-        public IActionResult Cancel(int id)
+        public IActionResult Cancel(int id, DebitViewModel model)
         {
             var debit = _context.Debits.FirstOrDefault(x => x.ID == id);
             var sMail = _context.Personels.Where(x => x.ID.Equals(debit.PersonelID)).Select(x => x.Email).ToString();
             if (debit.IsCorfirmed)
             {
                 debit.IsCorfirmed = false;
-                TempData["message"] = "Zimmet iptal edildi";
                 _context.SaveChanges();
 
-                _mailService.SendEmail(new MailTemplate(sMail, "Zimmet iptali",));
+                _mailService.SendEmail(new MailTemplate(sMail, "Zimmet iptali",model.Cancelation,"yonetici@ik.com"));
+                TempData["message"] = "Zimmet iptal edildi";
 
                 return RedirectToAction("Index", "Debit", new { Id = HttpContext.Session.GetString("userId") });
             }

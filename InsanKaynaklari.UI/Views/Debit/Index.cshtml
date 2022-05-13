@@ -62,12 +62,19 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     Zimmeti iptal etmek istiyor musunuz? id= @item.ID
-                                                    
-                                                </div>
+                                                    <form method="post" asp-controller="Debit" asp-action="Cancel">
+                                                        <div class="form-group">
+                                                            <label asp-for="Cancelation" class="control-label"></label>
+                                                            <input asp-for="Cancelation" class="form-control" />
+                                                            <span asp-validation-for="Cancelation" class="text-danger"></span>
+                                                        </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                                                            <a class="btn btn-danger" asp-action="Cancel" asp-route-id="@item.ID">İptal Et</a>
+                                                            <a type="submit" class="btn btn-danger" asp-action="Cancel" asp-route-id="@item.ID">İptal Et</a>
                                                         </div>
+                                                    </form>
+
+                                                </div>
 
                                             </div>
                                         </div>
