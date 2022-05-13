@@ -10,6 +10,8 @@ using InsanKaynaklari.Entities.Concrete;
 using InsanKaynaklari.UI.Filters;
 using Microsoft.AspNetCore.Http;
 using InsanKaynaklari.UI.ViewModels.Expenses;
+using Microsoft.AspNetCore.Hosting;
+using InsanKaynaklari.UI.Managers;
 
 namespace InsanKaynaklari.UI.Controllers
 {
@@ -17,10 +19,12 @@ namespace InsanKaynaklari.UI.Controllers
     public class ExpensesController : Controller
     {
         private readonly DatabaseContext _context;
-        
-        public ExpensesController(DatabaseContext context)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ExpensesController(DatabaseContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Expenses
@@ -68,16 +72,28 @@ namespace InsanKaynaklari.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CheckDocument,Amount,Explanation,ExpenseTypeID")] Expense expense)
+        public async Task<IActionResult> Create(IndexViewModel expense)
         {
             if (ModelState.IsValid)
-            {               
-                expense.ConfirmStatus = Entities.Enums.ConfirmStatus.OnHold;
-                expense.PersonelID = Convert.ToInt32(HttpContext.Session.GetString("userId"));
-                _context.Add(expense);
+            {
+                var newexpense = new Expense
+                {
+                    CheckDocument = expense.CheckDocument.GetUniqueNameAndSavePhotoToDisk(_webHostEnvironment),
+                    ConfirmStatus = Entities.Enums.ConfirmStatus.OnHold,
+                    PersonelID = Convert.ToInt32(HttpContext.Session.GetString("userId")),
+                    ExpenseTypeID = expense.ExpenseTypeID,
+                    Amount = expense.Amount,
+                    DateOfExpense = expense.DateOfExpense,
+                    Explanation = expense.Explanation,
+                };
+                _context.Add(newexpense);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
+                
+               
+            
             ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes, "ID", "ExpenseTypeName", expense.ExpenseTypeID);
             return View(expense);
         }
