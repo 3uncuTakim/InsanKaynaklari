@@ -42,25 +42,22 @@ namespace InsanKaynaklari.UI.Controllers
 
             var newDebit = new DebitViewModel
             {
-                DebitList = debit
+                DebitList = debit              
+                           
             };
             return View(newDebit);
-            //izinlerdekinin aynısı webgrid kulllanılacak (sb admin-2)
-            //Onay butonu olacak (edit işlemi sadece confirm status ü değiştirecek)!sadece bir kere editleyebilecek
+           
             //İtiraz butonu olacak(e-mail (form şeklinde))
         }
-        [HttpGet("[controller]/[action]/{Id}")]
-        public IActionResult Cancel(int id, DebitViewModel model)
-        {
+        
+        public IActionResult Cancel( DebitViewModel model,int id)
+        {           
             var debit = _context.Debits.FirstOrDefault(x => x.ID == id);
-            var sMail = _context.Personels.Where(x => x.ID.Equals(debit.PersonelID)).Select(x => x.Email).ToString();
+            var sMail = _context.Personels.Where(x => x.ID.Equals(debit.PersonelID)).Select(x => x.Email).FirstOrDefault();
             if (debit.IsCorfirmed)
-            {
-                debit.IsCorfirmed = false;
-                _context.SaveChanges();
-
-                _mailService.SendEmail(new MailTemplate(sMail, "Zimmet iptali",model.Cancelation,"yonetici@ik.com"));
-                TempData["message"] = "Zimmet iptal edildi";
+            {              
+                _mailService.SendEmail(new MailTemplate(sMail, "Zimmet iptali", model.Cancelation, "yonetici@ik.com"));
+                TempData["message"] = "Zimmet iptal isteği iletilmiştir.";
 
                 return RedirectToAction("Index", "Debit", new { Id = HttpContext.Session.GetString("userId") });
             }

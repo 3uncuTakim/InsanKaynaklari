@@ -67,28 +67,29 @@
                         </div>
                         <span asp-validation-for="CheckDocument" class="text-danger"></span>
                     </div>
-                    <label asp-for="ExpenseTypeID" class="control-label">Harcama Türü</label>
-                    <select asp-for="ExpenseTypeID" class="form-control" asp-items="ViewBag.ExpenseTypeID"></select>
-                    <span asp-validation-for="ExpenseTypeID" class="text-danger"></span>
-                    <br />
-                    <label>
-                        Tutar
-                    </label>
-                    <input type="text" name="Amount" class="form-control" />
-                    <br />
-                    <label>
-                        Açıklama
-                    </label>
-                    <textarea asp-for="Explanation" class="form-control" style="width:100%; height:150px;"></textarea>
-                    <br />
-                    <label>
-                        Harcama Tarihi
-                    </label>
-                    <input type="date" name="DateOfExpense" class="form-control" />
-                    <br />
-                    <button class="btn btn-info">Kaydet</button>
-
-
+                    <div class="form-group">
+                        <label asp-for="ExpenseTypeID" class="control-label">Harcama Türü</label>
+                        <select asp-for="ExpenseTypeID" class="form-control" asp-items="ViewBag.ExpenseTypeID"></select>
+                        <span asp-validation-for="ExpenseTypeID" class="text-danger"></span>
+                    </div> 
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input type="number" asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Explanation" class="control-label"></label>
+                        <textarea maxlength="250" asp-for="Explanation" class="form-control" style="width:100%; height:150px;"></textarea>
+                        <span asp-validation-for="Explanation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DateOfExpense" class="control-label"></label>
+                        <input type="date" asp-for="DateOfExpense" class="form-control" value="" />
+                        <span asp-validation-for="DateOfExpense" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Kaydet" class="btn btn-primary" />
+                    </div>                             
                 </form>
             </div>
 
