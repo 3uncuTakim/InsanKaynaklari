@@ -51,6 +51,8 @@ namespace InsanKaynaklari.UI
             }
             app.UseStaticFiles();
 
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error", "?code={0}"); //404 Sayfa Bulunamadý Hatasýnda Yönlendirilecek Sayfa
+
             app.UseRouting();
             app.UseHttpsRedirection();
 
