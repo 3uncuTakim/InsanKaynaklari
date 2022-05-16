@@ -180,7 +180,7 @@ namespace InsanKaynaklari.UI.Controllers
                 return NotFound();
             }
             _context.Expenses.Remove(deleted);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Expenses", new { Id = HttpContext.Session.GetString("userId") });
         }
             
