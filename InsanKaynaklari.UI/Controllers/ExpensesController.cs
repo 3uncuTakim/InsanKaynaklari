@@ -32,8 +32,9 @@ namespace InsanKaynaklari.UI.Controllers
         {
             ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes.OrderBy(x => x.ExpenseTypeName), "ID", "ExpenseTypeName");
             var databaseContext = _context.Expenses.Include(e => e.ExpenseType).Include(e => e.Personel);
-            var vm = new IndexViewModel() { 
-            Expenses = await databaseContext.ToListAsync()
+            var vm = new IndexViewModel()
+            {
+                Expenses = await databaseContext.ToListAsync()
             };
             return View(vm);
         }
@@ -62,7 +63,7 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpGet("[controller]/[action]/{Id}")]
         public IActionResult Create(string Id)
         {
-            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes.OrderBy(x=>x.ExpenseTypeName), "ID", "ExpenseTypeName");          
+            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes.OrderBy(x => x.ExpenseTypeName), "ID", "ExpenseTypeName");
             return View();
         }
 
@@ -91,9 +92,9 @@ namespace InsanKaynaklari.UI.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-                
-               
-            
+
+
+
             ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes, "ID", "ExpenseTypeName", expense.ExpenseTypeID);
             return View(expense);
         }
@@ -103,17 +104,28 @@ namespace InsanKaynaklari.UI.Controllers
         {
             if (id == null)
             {
+
                 return NotFound();
             }
 
             var expense = await _context.Expenses.FindAsync(id);
+            ExpenseEditVM editVM = new()
+            {
+                ID = expense.ID,
+                Amount = expense.Amount,
+                CheckDocumentName = expense.CheckDocument,
+                DateOfExpense = expense.DateOfExpense,
+                ExpenseTypeID = expense.ExpenseTypeID,
+                Explanation = expense.Explanation,
+
+            };
             if (expense == null)
             {
                 return NotFound();
             }
             ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes, "ID", "ExpenseTypeName", expense.ExpenseTypeID);
-            ViewData["PersonelID"] = new SelectList(_context.Personels, "ID", "Email", expense.PersonelID);
-            return View(expense);
+
+            return View(editVM);
         }
 
         // POST: Expenses/Edit/5
@@ -121,36 +133,37 @@ namespace InsanKaynaklari.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CheckDocument,Amount,Explanation,ConfirmStatus,ExpenseTypeID,PersonelID,ID")] Expense expense)
+        public async Task<IActionResult> Edit(int id, ExpenseEditVM editVM)
         {
-            if (id != expense.ID)
+            var newExpense = await _context.Expenses.FindAsync(id);
+            if (id != editVM.ID)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
+                newExpense.Amount = editVM.Amount;
+                newExpense.DateOfExpense = editVM.DateOfExpense;
+                newExpense.ExpenseTypeID = editVM.ExpenseTypeID;
+                newExpense.Explanation = editVM.Explanation;
+
+                if (editVM.CheckDocument is not null)
                 {
-                    _context.Update(expense);
-                    await _context.SaveChangesAsync();
+                    newExpense.CheckDocument = editVM.CheckDocument.GetUniqueNameAndSavePhotoToDisk(_webHostEnvironment);
+                    FileManager.RemoveImageFromDisk(editVM.CheckDocumentName, _webHostEnvironment);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExpenseExists(expense.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
+                TempData["message"] = "Harcama Güncellendi";
+                return RedirectToAction("Index", "Expenses", new { Id = HttpContext.Session.GetString("userId") });
+
+
             }
-            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes, "ID", "ExpenseTypeName", expense.ExpenseTypeID);
-            ViewData["PersonelID"] = new SelectList(_context.Personels, "ID", "Email", expense.PersonelID);
-            return View(expense);
+
+            ViewData["ExpenseTypeID"] = new SelectList(_context.ExpenseTypes, "ID", "ExpenseTypeName");
+
+
+            return View(editVM);
         }
 
         // GET: Expenses/Delete/5
@@ -160,34 +173,22 @@ namespace InsanKaynaklari.UI.Controllers
             {
                 return NotFound();
             }
-
-            var expense = await _context.Expenses
-                .Include(e => e.ExpenseType)
-                .Include(e => e.Personel)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (expense == null)
+            var deleted = _context.Expenses.FirstOrDefault(x => x.ID == id);
+            
+            if (deleted == null)
             {
                 return NotFound();
             }
-
-            return View(expense);
+            _context.Expenses.Remove(deleted);
+            _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Expenses", new { Id = HttpContext.Session.GetString("userId") });
         }
-
-        // POST: Expenses/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var expense = await _context.Expenses.FindAsync(id);
-            _context.Expenses.Remove(expense);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            
 
         private bool ExpenseExists(int id)
         {
             return _context.Expenses.Any(e => e.ID == id);
         }
-       
+
     }
 }

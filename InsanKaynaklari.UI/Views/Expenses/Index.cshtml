@@ -29,6 +29,8 @@
                             <th>Tutar</th>
                             <th>Fiş Tarihi</th>
                             <th>Onay Durumu</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +42,34 @@
                                 <th>@item.Amount</th>
                                 <th>@item.DateOfExpense</th>
                                 <th>@item.ConfirmStatus</th>
+                                @if (item.ConfirmStatus == ConfirmStatus.OnHold)
+                                {
+                                    <th><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a></th>
+                                    <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal@(item.ID)">Sil</button></th>
+                                    <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Silme İşlemi</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Silmek istediğinize emin misiniz? id= @item.ID
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                                                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Sil</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <th>Onaylandı.</th>
+                                }
+
                             </tr>
                         }
                     </tbody>
@@ -71,7 +101,7 @@
                         <label asp-for="ExpenseTypeID" class="control-label">Harcama Türü</label>
                         <select asp-for="ExpenseTypeID" class="form-control" asp-items="ViewBag.ExpenseTypeID"></select>
                         <span asp-validation-for="ExpenseTypeID" class="text-danger"></span>
-                    </div> 
+                    </div>
                     <div class="form-group">
                         <label asp-for="Amount" class="control-label"></label>
                         <input type="number" asp-for="Amount" class="form-control" />
@@ -89,7 +119,7 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Kaydet" class="btn btn-primary" />
-                    </div>                             
+                    </div>
                 </form>
             </div>
 
