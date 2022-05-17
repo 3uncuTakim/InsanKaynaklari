@@ -18,7 +18,7 @@
                         foreach (var item in Model.Leaves)
                         {
                             <ul>
-                                <li>@(item.LeaveTypeName+" "+item.LeaveStartDate.ToString("dd/MMMM")+" "+item.LeaveDuration+" gün")</li>
+                                <li>@(item.LeaveTypeName+" "+item.LeaveStartDate.ToString("dd MMMM")+" "+item.LeaveDuration+" gün")</li>
                             </ul>
                         }
                     }
@@ -40,7 +40,7 @@
                     @foreach (var item in Model.BirthDays)
                     {
                         <ul class="list-group">
-                            <li class="list-group-item">@item.Birthday.ToString("dd/MMMM") -- @(item.Firstname +" "+ item.Lastname)</li>
+                            <li class="list-group-item">@item.Birthday.ToString("dd MMMM") -- @(item.Firstname +" "+ item.Lastname)</li>
                         </ul>
                     }
                 </div>
