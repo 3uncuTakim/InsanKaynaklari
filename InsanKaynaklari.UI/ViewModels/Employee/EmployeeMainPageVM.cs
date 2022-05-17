@@ -20,7 +20,7 @@ namespace InsanKaynaklari.UI.ViewModels.Employee
         public string Firstname { get; set; }
         public string Lastname { get; set; }
     }
-
+    
     public class Leavelist
     {
         public string LeaveTypeName { get; set; }
