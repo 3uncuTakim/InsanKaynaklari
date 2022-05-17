@@ -40,7 +40,7 @@
                                 <th>@item.Explanation</th>
                                 <th>@item.ExpenseType.ExpenseTypeName</th>
                                 <th>@item.Amount</th>
-                                <th>@item.DateOfExpense</th>
+                                <th>@item.DateOfExpense.ToString("dd MMMM")</th>
                                 <th>@item.ConfirmStatus</th>
                                 @if (item.ConfirmStatus == ConfirmStatus.OnHold)
                                 {

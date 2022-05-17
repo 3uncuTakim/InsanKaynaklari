@@ -45,11 +45,11 @@
                             <tr>
                                 <th><a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.ID">Detay</a></th>
                                 <th>@item.LeaveTypeName</th>
-                                <th>@item.StartLeaveDate.ToString("dd/MMMM")</th>
-                                <th>@item.EndLeaveDate.ToString("dd/MMMM")</th>
+                                <th>@item.StartLeaveDate.ToString("dd MMMM")</th>
+                                <th>@item.EndLeaveDate.ToString("dd MMMM")</th>
                                 <th>@item.TotalDaysOff</th>
                                 <th>@item.ConfirmStatus</th>
-                                @if (item.StartLeaveDate >= DateTime.Today.AddDays(7) && item.ConfirmStatus == ConfirmStatus.OnHold)
+                                @if (item.StartLeaveDate >= DateTime.Today && item.ConfirmStatus == ConfirmStatus.OnHold)
                                 {
                                     <th><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a></th>
                                 }
