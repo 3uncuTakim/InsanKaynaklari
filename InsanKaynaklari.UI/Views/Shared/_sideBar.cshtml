@@ -15,27 +15,25 @@
         </a>
 
         <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-        <li class="nav-item ">
-            <a class="nav-link text-center" href="#">Avanslar</a>
-        </li>
+        <hr class="sidebar-divider my-0">               
 
         <li class="nav-item ">
             <a class="nav-link text-center" href="~/Expenses/Index/@Context.Session.GetString("userId")">Harcamalar</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link text-center" href="~/Debit/Index/@Context.Session.GetString("userId")">Zimmetler</a>
-        </li>
-        <li class="nav-item ">
             <a class="nav-link text-center" href="~/Leaves/Index/@Context.Session.GetString("userId")">İzinler</a>
         </li>
-        <li class="nav-item ">
+         <li class="nav-item ">
+            <a class="nav-link text-center" href="~/Calendar/Index/@Context.Session.GetString("userId")">Takvim</a>
+        </li>
+         <li class="nav-item ">
             <a class="nav-link text-center" href="#">Vardiya</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link text-center" href="~/Calendar/Index/@Context.Session.GetString("userId")">Takvim</a>
-        </li>
+            <a class="nav-link text-center" href="~/Debit/Index/@Context.Session.GetString("userId")">Zimmetler</a>
+        </li>      
+       
+       
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 

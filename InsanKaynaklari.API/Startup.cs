@@ -1,5 +1,4 @@
 using InsanKaynaklari.Business.Manager.Abstract;
-using InsanKaynaklari.Business.Manager.Concrete;
 using InsanKaynaklari.DataAccess.Repository.Abstract;
 using InsanKaynaklari.DataAccess.Repository.Concrete;
 using Microsoft.AspNetCore.Builder;
@@ -30,8 +29,7 @@ namespace InsanKaynaklari.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IAdvancePaymentRepository, AdvancePaymentRepository>();
-            //services.AddScoped<IAdvancePaymentService, AdvancePaymentManager>();
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

@@ -18,7 +18,6 @@ namespace InsanKaynaklari.DataAccess.Context
         public DbSet<Company> Companies { get; set; }
         public DbSet<Personel> Personels { get; set; }
         public DbSet<PersonelDetail> PersonelDetails { get; set; }
-        public DbSet<AdvancePayment> AdvancePayments { get; set; }
         public DbSet<Debit> Debits { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<ExpenseType> ExpenseTypes { get; set; }
@@ -43,7 +42,6 @@ namespace InsanKaynaklari.DataAccess.Context
             modelBuilder.ApplyConfiguration(new ExpenseMAP());
             modelBuilder.ApplyConfiguration(new ExpenseTypeMAP());
             modelBuilder.ApplyConfiguration(new ShiftMAP());
-            modelBuilder.ApplyConfiguration(new AdvancePaymentMAP());
             modelBuilder.ApplyConfiguration(new CompanyMAP());
             modelBuilder.ApplyConfiguration(new PersonelEventMAP());
 
