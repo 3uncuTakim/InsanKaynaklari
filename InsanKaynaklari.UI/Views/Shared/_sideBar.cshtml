@@ -1,4 +1,7 @@
-﻿<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+﻿
+<link href="~/css/all.min.css" rel="stylesheet" />
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     @if (Context.Session.GetString("username") != null)
     {
         <!-- Sidebar - Brand -->
@@ -25,10 +28,10 @@
             <a class="nav-link text-center" href="~/Leaves/Index/@Context.Session.GetString("userId")">İzinler</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link text-center" href="~/Calendar/Index/@Context.Session.GetString("userId")">Takvim</a>
+            <a class="nav-link text-center" href="~/Calendar/Index/@Context.Session.GetString("userId")"><i class="fas fa-calendar-alt"></i>  Takvim</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link text-center" href="#">Vardiya</a>
+            <a class="nav-link text-center" href="#">Vardiya </a>
         </li>
         <li class="nav-item ">
             <a class="nav-link text-center" href="~/Debit/Index/@Context.Session.GetString("userId")">Zimmetler</a>
@@ -38,7 +41,7 @@
         <hr class="sidebar-divider my-0">
         <div style="height:25%;">
         <li class="nav-item ">
-            <a class="nav-link text-center" href="~/Settings/Profile/@Context.Session.GetString("userId")"> Hesabım @Context.Session.GetString("username")</a>
+            <a class="nav-link text-center" href="~/Settings/Profile/@Context.Session.GetString("userId")"><i class="fas fa-id-card"></i>  Hesabım @Context.Session.GetString("username")</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-center " asp-controller="LogIn" asp-action="LogOut"> Log Out (@Context.Session.GetString("username"))</a>
