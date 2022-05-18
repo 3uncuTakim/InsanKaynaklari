@@ -26,8 +26,8 @@
               left: 'prev,next today',
               center: 'title',
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            initialDate: '2022-04-20',
+              },
+              initialDate: '@(DateTime.Today.ToString("yyyy-MM-dd"))',
             locale: "tr",
             themeSystem: "bootstrap",
             navLinks: true, // can click day/week names to navigate views
@@ -50,7 +50,7 @@
                 arg.event.remove()
               }
             },
-            editable: true,
+            editable: false,
               dayMaxEvents: true, // allow "more" link when too many events
               events: "/Calendar/GetAllEvent/@Context.Session.GetString("userId")"
           });
@@ -63,7 +63,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="mt-5" id='calendar' style= "max-height:600px; max-width:600px"></div>
+        <div class="mt-5" id='calendar' @*style= "max-height:600px; max-width:600px"*@></div>
     </div>
     <!--Bootstrap Script Files-->
     <script src="../twitter-bootstrap/js/bootstrap.js"></script>

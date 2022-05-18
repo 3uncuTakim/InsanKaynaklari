@@ -16,7 +16,7 @@ namespace InsanKaynaklari.UI.Controllers
     {
         private readonly DatabaseContext _context;
         private readonly IMailService _mailService;
-        //Sungur
+        
         public DebitController(DatabaseContext context, IMailService mailService)
         {
             _context = context;
