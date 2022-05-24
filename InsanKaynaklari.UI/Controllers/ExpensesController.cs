@@ -16,6 +16,7 @@ using InsanKaynaklari.UI.Managers;
 namespace InsanKaynaklari.UI.Controllers
 {
     [LoggedUser]
+    [NewAuthorization(Role = "Employee")]
     public class ExpensesController : Controller
     {
         private readonly DatabaseContext _context;
