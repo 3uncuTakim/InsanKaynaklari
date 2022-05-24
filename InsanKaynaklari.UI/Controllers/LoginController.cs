@@ -41,13 +41,23 @@ namespace InsanKaynaklari.UI.Controllers
                     }
                     else
                     {
-                    var name = _context.PersonelDetails.Where(x => x.ID == user.ID).FirstOrDefault();
-                    var company = _context.Companies.Where(x => x.ID == user.CompanyID).FirstOrDefault();
-                    HttpContext.Session.SetString("userId", user.ID.ToString());
-                    HttpContext.Session.SetString("username", name.FirstName.ToString());
-                    HttpContext.Session.SetString("usercompany", company.CompanyName.ToString());
-                    return RedirectToAction("Index", "Employee", new { Id = HttpContext.Session.GetString("userId") });
-
+                        var name = _context.PersonelDetails.Where(x => x.ID == user.ID).FirstOrDefault();
+                        var userRole = _context.Personels.Where(x => x.ID == user.ID).Select(x => x.Role).FirstOrDefault();
+                        var company = _context.Companies.Where(x => x.ID == user.CompanyID).FirstOrDefault();
+                        HttpContext.Session.SetString("userId", user.ID.ToString());
+                        HttpContext.Session.SetString("username", name.FirstName.ToString());
+                        HttpContext.Session.SetString("usercompany", company.CompanyName.ToString());
+                        HttpContext.Session.SetString("usercompanyId", company.ID.ToString());
+                        HttpContext.Session.SetString("userrole", userRole.ToString());
+                        if (userRole == Entities.Enums.UserStatus.Employee)
+                        {
+                            return RedirectToAction("Index", "Employee", new { Id = HttpContext.Session.GetString("userId") });
+                        }
+                        else if (userRole == Entities.Enums.UserStatus.Manager)
+                        {
+                            return RedirectToAction("Index", "Manager", new { Id = HttpContext.Session.GetString("userId") });
+                        }                       
+                        
                     }
                 }
                 else
@@ -67,7 +77,9 @@ namespace InsanKaynaklari.UI.Controllers
         {
             HttpContext.Session.Remove("username");
             HttpContext.Session.Remove("userId");
-            HttpContext.Session.Remove("companyname");
+            HttpContext.Session.Remove("usercompany");
+            HttpContext.Session.Remove("usercompanyId");
+            HttpContext.Session.Remove("userrole");
             return RedirectToAction("Index", "Home");
         }
     }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace InsanKaynaklari.UI.Controllers
 {
     [LoggedUser]
+    [NewAuthorization(Role = "Employee")]
     public class DebitController : Controller
     {
         private readonly DatabaseContext _context;
