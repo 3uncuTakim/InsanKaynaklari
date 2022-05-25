@@ -56,15 +56,16 @@ namespace InsanKaynaklari.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (change.Password == change.PasswordControl)
+                if (change.Password == change.PasswordControl && change.NewPassword == change.NewPasswordControl)
                 {
                     var oldPassword = _context.Personels.FirstOrDefault(x => x.ID.ToString().Equals(HttpContext.Session.GetString("userId")));
-                    oldPassword.Password = change.Password;
+                    oldPassword.Password = change.NewPassword;
                     _context.SaveChanges();
                     return RedirectToAction("Profile", "Settings", new { Id = HttpContext.Session.GetString("userId") });
                 }
                 else
                 {
+                    TempData["message"] = "Şifre yanlış girilmiştir";
                     return View(change);
                 }
                 

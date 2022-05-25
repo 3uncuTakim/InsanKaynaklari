@@ -1,23 +1,24 @@
 ﻿@model List<EmployeeListVM>
 @{
     ViewData["Title"] = "EmployeeList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
 <div class="container-fluid">
-    @foreach (var item in Model)
-    {
-        <div class="row m-2">
-            <div class="col-md-3 col-sm-12"></div>
-            <div class="card"style="width:18rem;">
-                <img class="card-img" src="~/images/@item.Photo" />
-                <div class="card-body text-center">
-                    <h4 class="card-title">@item.FirstName @item.LastName </h4>
-                    <a class="btn btn-info" href="~/Manager/EmployeeDetail/@item.ID" >Personel Detayı</a>
+    <div class="row m-2">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-lg-3 col-md-12 d-flex align-items-stretch">
+                <div class="card m-4" >
+                    <img class="card-img-top rounded-circle p-1 img-fluid"  src="~/images/@item.Photo" />
+                    <div class="card-body text-center">
+                        <h4 class="card-title">@item.FirstName @item.LastName </h4>
+                        <a class="btn btn-info" href="~/Manager/EmployeeDetail/@item.ID">Personel Detayı</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    
-    }
+        }
+    </div>
 </div>
 

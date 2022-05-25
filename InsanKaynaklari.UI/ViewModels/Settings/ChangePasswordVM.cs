@@ -10,5 +10,7 @@ namespace InsanKaynaklari.UI.ViewModels.Settings
         public int ID { get; set; }
         public string Password { get; set; }
         public string PasswordControl { get; set; }
+        public string NewPassword { get; set; }
+        public string NewPasswordControl { get; set; }
     }
 }

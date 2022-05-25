@@ -1,0 +1,115 @@
+﻿@model EmployeeCreateVM
+@{
+    ViewData["Title"] = "CreateEmployee";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<form asp-controller="Manager" asp-action="CreateEmployee" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">İsim</label>
+                <input type="text" asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Soyisim</label>
+                <input type="text" asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+       
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">E-Mail</label>
+                <input type="email" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Birthday" class="control-label">Doğum Günü</label>
+                <input type="date" asp-for="Birthday" class="form-control" />
+                <span asp-validation-for="Birthday" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Wage" class="control-label">Maaş</label>
+                <input type="number" asp-for="Wage" class="form-control" />
+                <span asp-validation-for="Wage" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label">İşe Başlangıç Tarihi</label>
+                <input type="date" asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Ünvan</label>
+                <input type="text" asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="WorkStyle" class="control-label">Çalışma Şekli</label>
+                <input type="text" asp-for="WorkStyle" class="form-control" />
+                <span asp-validation-for="WorkStyle" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Department" class="control-label">Departman</label>
+                <input type="text" asp-for="Department" class="form-control" />
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Adres</label>
+                <textarea maxlength="250" asp-for="Address" class="form-control" style="width:100%; height:150px;"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Picture" class="control-label">Fotograf Ekle</label>
+                <div class="custom-file">
+                    <input asp-for="Picture" class="custom-file-input" id="customFile" />
+                    <label class="custom-file-label" for="customFile">Choose File</label>
+                </div>
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            <div class="form-group float-right mt-4">
+                <input type="submit" value="Personel Ekle" class="btn btn-info" />
+                <a href="~/Manager/EmployeeList/@Context.Session.GetString("userId")" class="btn btn-primary"><i class="fas fa-fast-backward"> Geri Dön</i></a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script type="text/javascript">
+        $("custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+
+

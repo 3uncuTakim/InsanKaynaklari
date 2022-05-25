@@ -129,19 +129,27 @@ namespace InsanKaynaklari.UI.Controllers
                 ViewData["LeaveTypeID"] = new SelectList(_context.LeaveTypes.OrderBy(x => x.TypeName), "ID", "TypeName");
                 return View(leave);
             }
-            newLeave.LeaveTypeID = leave.LeaveTypeID;
-            newLeave.Description = leave.Description;
-            newLeave.StartLeaveDate = leave.StartLeaveDate;
-            newLeave.EndLeaveDate = leave.EndLeaveDate;
-            newLeave.TotalDaysOff = Convert.ToInt32(GetBusinessDay.GetBusinessDays(leave.StartLeaveDate, leave.EndLeaveDate));
-            if (leave.LeaveDocument is not null)
+            if (ModelState.IsValid)
             {
-                newLeave.LeaveDocument = leave.LeaveDocument.GetUniqueNameAndSavePhotoToDisk(_webHostEnvironment);
-                FileManager.RemoveImageFromDisk(leave.LeaveDocumentName, _webHostEnvironment);
+                newLeave.LeaveTypeID = leave.LeaveTypeID;
+                newLeave.Description = leave.Description;
+                newLeave.StartLeaveDate = leave.StartLeaveDate;
+                newLeave.EndLeaveDate = leave.EndLeaveDate;
+                newLeave.TotalDaysOff = Convert.ToInt32(GetBusinessDay.GetBusinessDays(leave.StartLeaveDate, leave.EndLeaveDate));
+                if (leave.LeaveDocument is not null)
+                {
+                    newLeave.LeaveDocument = leave.LeaveDocument.GetUniqueNameAndSavePhotoToDisk(_webHostEnvironment);
+                    FileManager.RemoveImageFromDisk(leave.LeaveDocumentName, _webHostEnvironment);
+                }
+                _context.SaveChanges();
+                TempData["message"] = "İzin Güncellendi";
+                return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
             }
-            _context.SaveChanges();
-            TempData["message"] = "İzin Güncellendi";
-            return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
+            else
+            {
+                return View(leave);
+            }
+            
 
         }
         public IActionResult Delete(int id)

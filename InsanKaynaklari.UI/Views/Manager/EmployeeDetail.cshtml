@@ -1,7 +1,7 @@
 ﻿@model EmployeeDetailVM
 @{
     ViewData["Title"] = "EmployeeDetail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
 <div class="container">
@@ -43,7 +43,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Doğum Günü</h6>
+                                <h6 class="mb-0">Doğum Tarihi</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
                                 @Model.Birthday.ToString("dd MMMM yyyy")
@@ -76,6 +76,14 @@
                                 @Model.Department
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Maaş</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.Wage
+                            </div>
+                        </div>
                         <hr />
                         <div class="row">
                             <div class="col-sm-3">
@@ -97,7 +105,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-6">
-                                <a class="btn btn-info " href="~/Manager/EmployeeEdit/@Model.ID">Düzenle</a>
+                                <a class="btn btn-info " href="~/Manager/EditEmployee/@Model.ID">Düzenle</a>
                             </div>
                             <div class="col-sm-6">
                                 @if (Model.Activation == true)
