@@ -11,9 +11,7 @@ using System.Threading.Tasks;
 
 namespace InsanKaynaklari.UI.Controllers
 {
-    [LoggedUser]
-    [NewAuthorization(Role = "Employee")]
-
+    [LoggedUser]  
     public class SettingsController : Controller
     {
         private readonly DatabaseContext _context;

@@ -48,16 +48,9 @@ namespace InsanKaynaklari.UI.Controllers
                         HttpContext.Session.SetString("username", name.FirstName.ToString());
                         HttpContext.Session.SetString("usercompany", company.CompanyName.ToString());
                         HttpContext.Session.SetString("usercompanyId", company.ID.ToString());
-                        HttpContext.Session.SetString("userrole", userRole.ToString());
-                        if (userRole == Entities.Enums.UserStatus.Employee)
-                        {
-                            return RedirectToAction("Index", "Employee", new { Id = HttpContext.Session.GetString("userId") });
-                        }
-                        else if (userRole == Entities.Enums.UserStatus.Manager)
-                        {
-                            return RedirectToAction("Index", "Manager", new { Id = HttpContext.Session.GetString("userId") });
-                        }                       
-                        
+                        HttpContext.Session.SetString("userrole", userRole.ToString());                     
+                        return RedirectToAction("Index", userRole.ToString(), new { Id = HttpContext.Session.GetString("userId") });
+                          
                     }
                 }
                 else

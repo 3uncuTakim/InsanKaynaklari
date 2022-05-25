@@ -1,0 +1,61 @@
+﻿
+<link href="~/css/all.min.css" rel="stylesheet" />
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    @if (Context.Session.GetString("username") != null)
+    {
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Manager/Index/@Context.Session.GetString("userId")">
+            <div class="img-fluid">
+                <img src="https://unsplash.it/30/30" />
+            </div>
+            @if (Context.Session.GetString("userId") != null)
+            {
+                <div class="sidebar-brand-text mx-3">@Context.Session.GetString("usercompany")</div>
+
+            }
+
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <div style="height:75%;">
+        <li class="nav-item ">
+            <a class="nav-link text-center" href="~/Manager/EmployeeList/@Context.Session.GetString("userId")">Çalışan Listesi</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-center" href="#">Etkinlik ekle</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-center" href="~/Calendar/Index/@Context.Session.GetString("userId")"><i class="fas fa-calendar-alt"></i>  Takvim</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-center" href="#">Çalışan istekleri </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-center" href="#">Zimmet Ekle</a>
+        </li>
+
+        </div>
+        <hr class="sidebar-divider my-0">
+        <div style="height:25%;">
+        <li class="nav-item ">
+            <a class="nav-link text-center" href="~/Settings/Profile/@Context.Session.GetString("userId")"><i class="fas fa-id-card"></i>  Hesabım @Context.Session.GetString("username")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-center " asp-controller="LogIn" asp-action="LogOut"> Log Out (@Context.Session.GetString("username"))</a>
+        </li>
+        </div>
+
+
+        <!-- Divider -->
+
+
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+    }
+</ul>

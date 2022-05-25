@@ -10,7 +10,6 @@ using System.Linq;
 namespace InsanKaynaklari.UI.Controllers
 {
     [LoggedUser]
-    [NewAuthorization(Role = "Employee")]
     public class CalendarController : Controller
     {
 

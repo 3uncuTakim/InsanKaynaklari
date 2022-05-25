@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="Https://unsplash.it/150/150" class="rounded-circle" width="150">
+                            <img src="~/images/@Model.Picture" class="rounded-circle" width="150">
                             <div class="mt-3">
                                 <h4>@(Model.FirstName +" "+ Model.LastName)</h4>
                                 <p class="text-secondary mb-1">@Model.Title</p>
@@ -47,7 +47,7 @@
                                 <h6 class="mb-0">Doğum Günü</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                @Model.Birthday
+                                @Model.Birthday.ToString("dd MMMM YYYY")
                             </div>
                         </div>
                         <hr>
