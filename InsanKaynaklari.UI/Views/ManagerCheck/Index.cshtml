@@ -1,0 +1,147 @@
+﻿@model ManagerCheckMainPageVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="m-0 p-2 font-weight-bold text-primary">Onay Bekleyen İzinler</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable1" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Adı</th>
+                            <th>Soyadı</th>
+                            <th>İzin Türü</th>
+                            <th>Başlangıç Tarihi</th>
+                            <th>Bitiş Tarihi</th>
+                            <th>Gün Sayısı</th>
+                            <th>Ayrıntılar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Leaves)
+                        {
+                            <tr>
+                                <th>@item.FirstName</th>
+                                <th>@item.LastName</th>
+                                <th>@item.LeaveTypeName</th>
+                                <th>@item.StartLeaveDate.ToString("dd MMMM")</th>
+                                <th>@item.EndLeaveDate.ToString("dd MMMM")</th>
+                                <th>@item.TotalDaysOff</th>
+                                <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#LeavesModal@(item.ID)">Detaylar</button></th>
+                                <div class="modal fade" id="LeavesModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">İzin Detayları</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>@item.Description</p>
+                                                <img class="img-fluid" src="/images/@item.LeaveDocument" />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <a class="btn btn-success" asp-action="AcceptLeave" asp-route-id="@item.ID">Onayla</a>
+                                                <a class="btn btn-warning" asp-action="RejectLeave" asp-route-id="@item.ID">Reddet</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="m-0 p-2 font-weight-bold text-primary">Onay Bekleyen Harcamalar</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable2" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Adı</th>
+                            <th>Soyadı</th>
+                            <th>Harcama Türü</th>
+                            <th>Fiş Tarihi</th>
+                            <th>Tutar</th>
+                            <th>Detaylar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Expenses)
+                        {
+                            <tr>
+                                <th>@item.FirstName</th>
+                                <th>@item.LastName</th>
+                                <th>@item.ExpenseTypeName</th>
+                                <th>@item.DateOfExpense.ToString("dd MMMM")</th>
+                                <th>@item.Amount</th>
+                                <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ExpenseModal@(item.ID)">Detaylar</button></th>
+                                <div class="modal fade" id="ExpenseModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">İzin Detayları</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>@item.Explanation</p>
+                                                <img class="img-fluid" src="/images/@item.CheckDocument" />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <a class="btn btn-success" asp-action="AcceptExpense" asp-route-id="@item.ID">Onayla</a>
+                                                <a class="btn btn-warning" asp-action="RejectExpense" asp-route-id="@item.ID">Reddet</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    @section Scripts{
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#myTable1').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                    }
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#myTable2').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                    }
+                });
+            });
+        </script>
+    }
+
+
+

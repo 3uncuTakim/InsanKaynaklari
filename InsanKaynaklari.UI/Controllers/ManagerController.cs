@@ -44,7 +44,7 @@ namespace InsanKaynaklari.UI.Controllers
                                  orderby BirthdayControl.IsBeforeNow(DateTime.Now, dt.Birthday), dt.Birthday.Month, dt.Birthday.Day
                                  select dt).Take(5).ToList();
             var empCount = _context.Personels.Where(x => x.CompanyID == Convert.ToInt32(HttpContext.Session.GetString("usercompanyId"))).Count();
-            ManagerMainPageVM main = new ManagerMainPageVM()
+            ManagerMainPageVM main = new()
             {
                 EmployeeCount=empCount,
                 BirthDays=orderBirthday
@@ -118,7 +118,7 @@ namespace InsanKaynaklari.UI.Controllers
         [HttpPost]
         public IActionResult CreateEmployee(EmployeeCreateVM model)
         {
-            Random rnd = new Random();
+            Random rnd = new ();
             if (ModelState.IsValid)
             {
                 var personel = new Personel
@@ -156,7 +156,7 @@ namespace InsanKaynaklari.UI.Controllers
         {
             var edit = _context.Personels.Find(id);
             var editDetail = _context.PersonelDetails.Find(id);
-            EmployeeEditVM model = new EmployeeEditVM()
+            EmployeeEditVM model = new()
             {
                 ID = edit.ID,
                 Email = edit.Email,

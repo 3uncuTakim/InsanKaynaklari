@@ -10,10 +10,11 @@
 <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
 
-<div class="container-fluid">
+<div class="container-fluid p-2">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-end">
+            <h5 class="m-0 p-2 font-weight-bold text-primary">Harcamalarınız</h5>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1"
                     data-url="@Url.Action("Create")">
                 Harcama Ekle
@@ -29,8 +30,8 @@
                             <th>Tutar</th>
                             <th>Fiş Tarihi</th>
                             <th>Onay Durumu</th>
-                            <th>Güncelle</th>
-                            <th>Sil</th>
+                            <th>İşlemler</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -44,8 +45,8 @@
                                 <th>@item.ConfirmStatus</th>
                                 @if (item.ConfirmStatus == ConfirmStatus.OnHold)
                                 {
-                                    <th><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a></th>
-                                    <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal@(item.ID)">Sil</button></th>
+                                    <th class="d-flex justify-content-between"><a asp-action="Edit" asp-route-id="@item.ID">Düzenle</a><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal@(item.ID)">Sil</button></th>
+                                    <th></th>
                                     <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -68,6 +69,7 @@
                                 else
                                 {
                                     <th>Onaylandı.</th>
+                                   
                                 }
 
                             </tr>

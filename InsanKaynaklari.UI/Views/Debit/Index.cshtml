@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-<div class="container-fluid">
+<div class="container-fluid p-2">
     <div class="card shadow mb-4">
         <div class="card-header d-flex justify-content-between">
             <h5 class="m-0 p-2 font-weight-bold text-primary">Zimmetler</h5>
@@ -32,7 +32,7 @@
                             <th>Zimmet kodu</th>
                             <th>Açıklama</th>
                             <th>Onay Durumu</th>
-                            <th> ---------  </th>
+                            <th>Onaylama  </th>
 
                         </tr>
                     </thead>
@@ -46,64 +46,68 @@
                                 <th>@item.DebitCode</th>
                                 <th>@item.Description</th>
                                 <th>@item.IsConfirmed</th>
-
-
-                                @if (item.IsConfirmed)
+                                @if (item.DateOfReturn is not null)
                                 {
-                                    <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal@(item.ID)">İptal Et</button></th>
-                                    <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">İptal Etme İşlemi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Zimmeti iptal etmek istiyor musunuz? id= @item.ID
-                                                    <form asp-controller="Debit" asp-action="Cancel" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen" >
-                                                        
-                                                        <div class="form-group">
-                                                            <label asp-for="Cancelation" class="control-label"></label>
-                                                            <input asp-for="Cancelation" class="form-control" />
-                                                            <span asp-validation-for="Cancelation" class="text-danger"></span>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                                                            <input  asp-action="Cancel" asp-route-id="@item.ID" class="btn btn-danger" type="submit" value="İptal Et"/>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <th>Teslim edildi</th>
                                 }
                                 else
                                 {
-                                    <th><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal@(item.ID)">Onayla</button></th>
-                                    <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Onaylama İşlemi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Zimmeti Onaylamak istiyor musunuz? id= @item.ID
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                                                    <a class="btn btn-danger" asp-action="Accept" asp-route-id="@item.ID">Onayla</a>
+                                    @if (item.IsConfirmed)
+                                    {
+                                        <th><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal@(item.ID)">İptal Et</button></th>
+                                        <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">İptal Etme İşlemi</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Zimmeti iptal etmek istiyor musunuz? id= @item.ID
+                                                        <form asp-controller="Debit" asp-action="Cancel" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen">
+
+                                                            <div class="form-group">
+                                                                <label asp-for="Cancelation" class="control-label"></label>
+                                                                <input asp-for="Cancelation" class="form-control" />
+                                                                <span asp-validation-for="Cancelation" class="text-danger"></span>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                                                <input asp-action="Cancel" asp-route-id="@item.ID" class="btn btn-danger" type="submit" value="İptal Et" />
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <th><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal@(item.ID)">Onayla</button></th>
+                                        <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Onaylama İşlemi</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Zimmeti Onaylamak istiyor musunuz? id= @item.ID
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                                        <a class="btn btn-danger" asp-action="Accept" asp-route-id="@item.ID">Onayla</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 }
-
-                            </tr>
+                        </tr>
                         }
                     </tbody>
                 </table>

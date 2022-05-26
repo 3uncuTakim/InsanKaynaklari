@@ -1,0 +1,66 @@
+﻿@model ManagerDebitCreateVM
+@{
+    ViewData["Title"] = "CreateDebit";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+
+<div class="container-fluid p-2">
+    <form asp-controller="ManagerDebit" asp-action="CreateDebit" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="DebitName" class="control-label"></label>
+                    <input asp-for="DebitName" class="form-control" />
+                    <span asp-validation-for="DebitName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="DebitCode" class="control-label"></label>
+                    <input asp-for="DebitCode" class="form-control" />
+                    <span asp-validation-for="DebitCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <label asp-for="DateOfIssue" class="control-label"></label>
+                <input type="date" asp-for="DateOfIssue" class="form-control" />
+                <span asp-validation-for="DateOfIssue" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea maxlength="250" asp-for="Description" class="form-control" style="width:100%; height:150px;"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="PersonelID" class="control-label"></label>
+                    <select id="ddlPersonel" asp-for="PersonelID" class="form-control" asp-items="ViewBag.PersonelList"></select>
+                    <span asp-validation-for="PersonelID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group d-flex justify-content-between">
+                    <input type="submit" value="Zimmet Ekle" class="btn btn-info" />
+                    <a href="~/ManagerDebit/Index/@Context.Session.GetString("userId")" class="btn btn-primary"><i class="fas fa-fast-backward"> Geri Dön</i></a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#ddlPersonel").select2();
+    });
+</script>
+
+

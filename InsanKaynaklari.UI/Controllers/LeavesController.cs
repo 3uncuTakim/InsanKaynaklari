@@ -164,7 +164,7 @@ namespace InsanKaynaklari.UI.Controllers
             else 
             {
                 //yöneticye email yollayacak izin iptali için (her işlem icin bir kere)
-                TempData["message"] = $"{deleted.StartLeaveDate.ToString("dd MMMM")}tarihinde başlayan {deleted.ID} nolu iznin iptal talebi iletilmiştir.";
+                TempData["message"] = $"{deleted.StartLeaveDate:dd MMMM}tarihinde başlayan {deleted.ID} nolu iznin iptal talebi iletilmiştir.";
                 return RedirectToAction("Index", "Leaves", new { Id = HttpContext.Session.GetString("userId") });
             }
             

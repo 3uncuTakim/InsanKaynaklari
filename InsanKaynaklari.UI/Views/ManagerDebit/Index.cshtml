@@ -1,0 +1,88 @@
+﻿@model List<ManagerDebitMainPageVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+<link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<div class="container-fluid p-2">
+    <div class="card shadow mb-4">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="m-0 p-2 font-weight-bold text-primary">Zimmetler</h5>
+            <a class="btn btn-info " href="~/ManagerDebit/CreateDebit/@Context.Session.GetString("userId")">Zimmet Ekle</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Adı</th>
+                            <th>Soyadı</th>
+                            <th>Zimmet İsmi</th>
+                            <th>Zimmet verilme tarihi</th>
+                            <th>Zimmet alınma tarihi</th>
+                            <th>Zimmet kodu</th>
+                            <th>Açıklama</th>
+                            <th>Onay Durumu</th>
+                            <th>Zimmet iptali </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.FirstName</th>
+                                <th>@item.LastName</th>
+                                <th>@item.DebitName</th>
+                                <th>@item.DateOfIssue.ToString("dd MMMM")</th>
+                                <th>@item.DateOfReturn?.ToString("dd MMMM")</th>
+                                <th>@item.DebitCode</th>
+                                <th>@item.Description</th>
+                                <th>@item.IsConfirmed</th>
+                                @if (item.DateOfReturn is not null)
+                                {
+                                    <th>İade edilmiş</th>
+                                }
+                                else
+                                {
+                                    <th><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal@(item.ID)">Zimmet Kaldır</button></th>
+                                    <div class="modal fade" id="exampleModal@(item.ID)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">İptal Etme İşlemi</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @item.DebitName adlı zimmeti geri alma işlemini onaylıyor musunuz?
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                                    <a asp-action="ReturnDebit" asp-route-id="@item.ID" class="btn btn-danger">Onayla</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script type="text/javascript">
+    $(document).ready( function () {
+    $('#myTable').DataTable({
+         "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+    }
+    });
+    });
+    </script>
+}
+
+

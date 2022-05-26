@@ -4,16 +4,16 @@
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
-<div class="container-fluid">
+<div class="container-fluid p-2">
     <div class="row m-2">
         @foreach (var item in Model)
         {
 
             <div class="col-lg-3 col-md-12 d-flex align-items-stretch">
                 <div class="card m-4" >
-                    <img class="card-img-top rounded-circle p-1 img-fluid"  src="~/images/@item.Photo" />
+                    <img class="card-img-top rounded-circle p-2 img-fluid"  src="~/images/@item.Photo" />
                     <div class="card-body text-center">
-                        <h4 class="card-title">@item.FirstName @item.LastName </h4>
+                        <h5 class="card-title">@item.FirstName @item.LastName </h5>
                         <a class="btn btn-info" href="~/Manager/EmployeeDetail/@item.ID">Personel Detayı</a>
                     </div>
                 </div>
