@@ -1,0 +1,66 @@
+﻿@model ManagerEventMainPageVM
+@{
+    ViewData["Title"] = "CreateEvent";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+<div class="container-fluid p-2">
+    <form asp-controller="ManagerEvent" asp-action="CreateEvent" enctype="multipart/form-data" asp-route-yonlen="@ViewBag.yonlen">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <textarea maxlength="250" asp-for="Title" class="form-control" style="width:100%; height:150px;"></textarea>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>           
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Start" class="control-label"></label>
+                    <input type="datetime-local" asp-for="Start" class="form-control" />
+                    <span asp-validation-for="Start" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <label asp-for="End" class="control-label"></label>
+                <input type="datetime-local" asp-for="End" class="form-control" />
+                <span asp-validation-for="End" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label">Arkaplan Rengi</label>
+                    <input type="color" asp-for="Color" class="form-control" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="TextColor" class="control-label">Yazı Rengi</label>
+                    <input type="color" asp-for="TextColor" class="form-control" />
+                    <span asp-validation-for="TextColor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="AssignedEmployees" class="control-label"></label>
+                    <select asp-for="AssignedEmployees" class="custom-select" multiple  asp-items="ViewBag.PersonelList"></select>
+                    <span asp-validation-for="AssignedEmployees" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group d-flex justify-content-between">
+                    <input type="submit" value="Zimmet Ekle" class="btn btn-info" />
+                    <a href="~/Manager/Index/@Context.Session.GetString("userId")" class="btn btn-primary"><i class="fas fa-fast-backward"> Geri Dön</i></a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+

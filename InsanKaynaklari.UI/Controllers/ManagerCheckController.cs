@@ -45,8 +45,8 @@ namespace InsanKaynaklari.UI.Controllers
             var expenses = (from et in _context.ExpenseTypes
                         join e in _context.Expenses on et.ID equals e.ExpenseTypeID
                         join p in _context.Personels on e.PersonelID equals p.ID
-                            join pd in _context.PersonelDetails on p.ID equals pd.ID
-                            where p.CompanyID == Convert.ToInt32(HttpContext.Session.GetString("usercompanyId")) && e.ConfirmStatus == Entities.Enums.ConfirmStatus.OnHold
+                        join pd in _context.PersonelDetails on p.ID equals pd.ID
+                        where p.CompanyID == Convert.ToInt32(HttpContext.Session.GetString("usercompanyId")) && e.ConfirmStatus == Entities.Enums.ConfirmStatus.OnHold
                         select new ManagerExpenseList
                         {
                             ID = e.ID,
